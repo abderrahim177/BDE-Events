@@ -17,3 +17,4 @@ Route::get('/admin', function (){
 Route::get('/students', function (){
     return view('clients.dashboard');
 });
+
