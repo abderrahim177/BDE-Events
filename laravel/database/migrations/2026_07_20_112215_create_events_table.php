@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->text('description');
+            $table->dateTime('date_time');
+            $table->string('location');
+            $table->decimal('price', 8, 2)->default(0.00); 
+            $table->integer('max_capacity');
             $table->timestamps();
         });
     }
