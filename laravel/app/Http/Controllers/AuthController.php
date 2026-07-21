@@ -34,17 +34,13 @@ class AuthController extends Controller
      public function Login(loginRequest $request)
 {
     $credentials = $request->validated();
-
     if (Auth::attempt($credentials)) {
         $request->session()->regenerate();
-
         if (Auth::user()->role === 'admin') {
-            return redirect()->intended('/admin/dashboard');
+            return redirect()->route('/admin');
         }
-
         return redirect()->route('/students'); 
     }
-
     return back()->withErrors([
         'email' => 'Vos identifiants sont incorrects !',
     ]);

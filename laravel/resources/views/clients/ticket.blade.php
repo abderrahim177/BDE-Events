@@ -93,8 +93,8 @@
       <a href="#" class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-white/5 transition-all duration-200">
         <img src="https://i.pravatar.cc/64?img=47" class="w-8 h-8 rounded-full object-cover">
         <div class="flex-1 min-w-0">
-          <p class="text-xs font-medium text-white truncate">Yasmine Bouzid</p>
-          <p class="text-[11px] font-light text-slate-500 truncate">Étudiante · L3 Info</p>
+          <p class="text-xs font-medium text-white truncate">{{ auth()->user()->name }}</p>
+          <p class="text-[11px] font-light text-slate-500 truncate">{{ auth()->user()->role }} · L3 Info</p>
         </div>
         <i class="fa-solid fa-arrow-right-from-bracket text-slate-500 text-xs"></i>
       </a>
@@ -121,8 +121,8 @@
         <div class="flex items-center gap-2.5">
           <img src="https://i.pravatar.cc/64?img=47" class="w-8 h-8 rounded-full object-cover">
           <div class="hidden md:block">
-            <p class="text-xs font-medium text-slate-800 leading-tight">Yasmine Bouzid</p>
-            <p class="text-[11px] font-light text-slate-400 leading-tight">Étudiante</p>
+            <p class="text-xs font-medium text-slate-800 leading-tight">{{ auth()->user()->name}}</p>
+            <p class="text-[11px] font-light text-slate-400 leading-tight">{{ auth()->user()->role }}</p>
           </div>
           <i class="fa-solid fa-chevron-down text-slate-400 text-[10px]"></i>
         </div>
