@@ -118,12 +118,13 @@
         <h2 class="text-2xl font-semibold text-slate-900 tracking-tight mb-1">Bon retour parmi nous</h2>
         <p class="text-slate-500 font-light text-sm mb-8">Connectez-vous pour accéder à vos événements.</p>
 
-        <form class="space-y-5">
+        <form action="{{route('Login')}}" method="POST"  class="space-y-5">
+          @csrf
           <div>
             <label class="block text-xs font-medium text-slate-600 mb-1.5">Email étudiant</label>
             <div class="relative">
               <i class="fa-regular fa-envelope absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
-              <input type="email" placeholder="prenom.nom@campus.fr"
+              <input type="email" name="email" placeholder="prenom.nom@campus.fr"
                 class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-slate-200 bg-white text-sm font-normal placeholder:text-slate-400 placeholder:font-light outline-none transition-all duration-200 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500">
             </div>
           </div>
@@ -132,7 +133,7 @@
             <label class="block text-xs font-medium text-slate-600 mb-1.5">Mot de passe</label>
             <div class="relative">
               <i class="fa-solid fa-lock absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
-              <input type="password" placeholder="••••••••"
+              <input type="password" name="password" placeholder="••••••••"
                 class="w-full pl-10 pr-10 py-2.5 rounded-lg border border-slate-200 bg-white text-sm font-normal placeholder:text-slate-400 placeholder:font-light outline-none transition-all duration-200 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500">
               <i class="fa-regular fa-eye absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm cursor-pointer hover:text-slate-600 transition-all duration-200"></i>
             </div>

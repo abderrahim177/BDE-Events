@@ -20,4 +20,5 @@ Route::get('/students', function (){
 
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register' , [AuthController::class , 'register'])->name('register');
-Route::get('/login' , [AuthController::class , 'Login'])->name('Login');
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login' , [AuthController::class , 'Login'])->name('Login');
