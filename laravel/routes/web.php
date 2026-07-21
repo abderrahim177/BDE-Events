@@ -10,6 +10,10 @@ Route::get('/admin', function (){
     return view('admin.dashboard');
 })->name('/admin');
 
+Route::get('/ticket' , function (){
+    return view('clients.ticket');
+})->name('ticket');
+
 Route::get('/students', function (){
     return view('clients.dashboard');
 })->name('/students');

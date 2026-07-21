@@ -37,7 +37,7 @@
       <a href="student-dashboard.html" class="nav-item nav-active flex items-center gap-3 px-3 py-2.5 rounded-lg text-white text-sm font-normal">
         <i class="fa-solid fa-compass w-4 text-center text-xs"></i> Découvrir
       </a>
-      <a href="tickets.html" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-normal">
+      <a href="{{route ('ticket')}}" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-normal">
         <i class="fa-solid fa-ticket w-4 text-center text-xs"></i> Mes Billets
       </a>
       <a href="#" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-normal">

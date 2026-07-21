@@ -20,11 +20,12 @@ class AuthController extends Controller
             'role' => 'student',
         ]);
         Auth::login($user);
-
         return redirect()->route('/students')->with('success', 'Bienvenue sur BDE-Events !');
     }
 
-    public function Login() {}
+    public function Login($request) {
+        
+    }
 
     public function Logout() {}
 }
