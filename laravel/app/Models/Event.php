@@ -9,20 +9,19 @@ class Event extends Model
 {
     protected $fillable = ['title', 'description', 'date_time', 'location', 'price', 'max_capacity'];
 
-    // الحجوزات للي تدارو لهاد الحدث
+    // les reservation li tdaro lhad l7adat
     public function reservations(): HasMany
     {
         return $this->hasMany(Reservation::class);
     }
-
-    // دالة لحساب المقاعد المتبقية في الوقت الحقيقي (US 1.2)
+    // had kat7seb ch7al diyal lblays ba9in fhad l7dat 
     public function remainingPlaces(): int
     {
         $reservedCount = $this->reservations()->count();
         return $this->max_capacity - $reservedCount;
     }
 
-    // دالة كتعلمنا واش الحدث عامر ومبقاش فيه البلايص
+    // hadi kat3lamna wach l7adat 3amer wla ba9i fih blays
     public function isFull(): bool
     {
         return $this->remainingPlaces() <= 0;

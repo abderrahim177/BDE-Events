@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CreateEvenmentController;
 use App\Http\Middleware\RoleMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -38,5 +39,6 @@ Route::middleware(['auth', RoleMiddleware::class . ':admin'])->group(function ()
 
 // 🚪 Logout Route
 Route::middleware('auth')->group(function (){
+Route::post('/admin/create' , [CreateEvenmentController::class , 'Create'])->name('Create_evenment');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });

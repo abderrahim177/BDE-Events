@@ -2,20 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateRequest;
+use App\Models\Event;
+use Error;
 use Illuminate\Http\Request;
 
 class CreateEvenmentController extends Controller
 {
-    public function index(){
+    public function index() {}
+    public function adminIndex() {}
+    public function Create(CreateRequest $request)
+{
+    $validated = $request->validated();
 
+    try {
+        Event::create([
+            'title'        => $validated['title'],
+            'description'  => $validated['description'],
+            'date_time'    => $validated['datetime'], 
+            'location'     => $validated['lieu'],
+            'max_capacity' => $validated['max_people'],
+        ]);
+        return redirect()->back()->with('success', 'Événement créé avec succès !');
+    } catch (\Throwable $e) {
+        logger()->error('Event Creation Error: ' . $e->getMessage());
+        return back()->with('error', 'Erreur: ' . $e->getMessage())->withInput();
     }
-    public function adminIndex(){
-
-    }
-    public function Creat(){
-
-    }
-    public function Store(){
-        
-    }
+}
+    public function Store() {}
 }

@@ -22,8 +22,12 @@ class CreateRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            
-        ];
+       return [
+        'title'      => 'required|string|max:255',
+        'description'=> 'required|string',
+        'datetime'   => 'required|date', 
+        'lieu'       => 'required|string|max:255',
+        'max_people' => 'required|integer|min:1',
+    ];
     }
 }
