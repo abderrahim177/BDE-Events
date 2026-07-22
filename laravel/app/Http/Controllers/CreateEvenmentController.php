@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateRequest;
 use App\Models\Event;
-use Error;
-use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 class CreateEvenmentController extends Controller
 {
     public function index() {}
@@ -14,9 +12,9 @@ class CreateEvenmentController extends Controller
     public function Create(CreateRequest $request)
 {
     $validated = $request->validated();
-
     try {
         Event::create([
+            'user_id' => Auth::id(),
             'title'        => $validated['title'],
             'description'  => $validated['description'],
             'date_time'    => $validated['datetime'], 

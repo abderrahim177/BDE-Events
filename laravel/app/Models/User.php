@@ -56,4 +56,15 @@ class User extends Authenticatable
     {
         return $this->role === 'admin';
     }
+    public function createdEvents()
+{
+    return $this->hasMany(Event::class, 'user_id');
+}
+// نجيبو الأحداث اللي حجز فيها هاد الطالب
+public function reservedEvents()
+{
+    return $this->belongsToMany(Event::class, 'reservations')
+                ->withPivot('status', 'ticket_reference')
+                ->withTimestamps();
+}
 }

@@ -94,13 +94,19 @@
             </nav>
 
             <div class="px-3 pb-5">
-                <form action="{{route ('logout')}}" method="POST" class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-red-300 transition-all duration-200">
-                    @csrf
+                <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-800/50 border border-slate-800">
+                    <img src="https://i.pravatar.cc/64?img=47" class="w-9 h-9 rounded-full object-cover ring-2 ring-indigo-500/30">
                     <div class="flex-1 min-w-0">
-                        <button type="submit" class="text-xs font-medium text-white truncate">Logout</button>
+                        <p class="text-xs font-semibold text-white truncate">{{ auth()->user()->name }}</p>
+                        <p class="text-[10px] font-medium text-slate-400 truncate capitalize">{{ auth()->user()->role ?? 'Étudiant' }}</p>
                     </div>
-                    <i class="fa-solid fa-arrow-right-from-bracket text-slate-500 text-xs"></i>
-                </form>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="text-slate-400 hover:text-red-400 transition-colors p-1">
+                            <i class="fa-solid fa-arrow-right-from-bracket text-xs"></i>
+                        </button>
+                    </form>
+                </div>
             </div>
         </aside>
 
