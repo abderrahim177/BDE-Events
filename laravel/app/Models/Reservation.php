@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 class Reservation extends Model
 {
-    protected $fillable = ['user_id', 'event_id', 'ticket_reference'];
+    protected $fillable = ['user_id', 'event_id', 'ticket_reference', 'status'];
 
 //     protected static function boot()
 // {

@@ -28,7 +28,8 @@ class AuthController extends Controller
             'role' => 'student',
         ]);
         Auth::login($user);
-        return redirect()->route('/students')->with('success', 'Bienvenue sur BDE-Events !');
+        
+        return redirect()->route('students.dashboard')->with('success', 'Bienvenue sur BDE-Events !');
     }
 
      public function Login(loginRequest $request)

@@ -6,6 +6,7 @@ use App\Http\Middleware\RoleMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GetAllevenmentController;
 use App\Http\Controllers\ReserverEventController;
+use App\Http\Controllers\TecketController;
 
 // 🌐 Routes عمومية (Public)
 Route::get('/', function () {
@@ -41,4 +42,6 @@ Route::post('/admin/create' , [CreateEvenmentController::class , 'Create'])->nam
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/students', [GetAllevenmentController::class, 'index'])->name('students.dashboard');
 Route::get('/reservation/{id}', [ReserverEventController::class, 'store'])->name('reservation');
+Route::get('/ticket' , [TecketController::class , 'store'])->name('Ticket');
+Route::get('/ticket/download/{id}', [TecketController::class, 'download'])->name('ticket.download');
 });
