@@ -10,14 +10,18 @@ class Reservation extends Model
 {
     protected $fillable = ['user_id', 'event_id', 'ticket_reference'];
 
-    protected static function boot()
-    {
-        parent::boot();
+//     protected static function boot()
+// {
+//     parent::boot();
 
-        static::creating(function ($reservation) {
-            $reservation->ticket_reference = 'BDE-2026-' . strtoupper(Str::random(5));
-        });
-    }
+//     static::creating(function ($reservation) {
+//         do {
+//             $code = 'BDE-2026-' . strtoupper(Str::random(5));
+//         } while (static::where('ticket_reference', $code)->exists());
+
+//         $reservation->ticket_reference = $code;
+//     });
+// }
 
     public function user(): BelongsTo
     {
