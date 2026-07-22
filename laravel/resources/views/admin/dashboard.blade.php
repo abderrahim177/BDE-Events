@@ -47,14 +47,13 @@
     </nav>
 
     <div class="px-3 pb-5">
-      <a href="#" class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-white/5 transition-all duration-200">
-        <img src="https://i.pravatar.cc/64?img=12" class="w-8 h-8 rounded-full object-cover">
-        <div class="flex-1 min-w-0">
-          <p class="text-xs font-medium text-white truncate">{{auth()->user()->name}}</p>
-          <p class="text-[11px] font-light text-slate-500 truncate">{{auth()->user()->role}}</p>
+      <form action="{{route ('logout')}}" method="POST" class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-red-300 transition-all duration-200">
+        @csrf
+      <div class="flex-1 min-w-0">
+          <button type="submit" class="text-xs font-medium text-white truncate">Logout</button>
         </div>
         <i class="fa-solid fa-arrow-right-from-bracket text-slate-500 text-xs"></i>
-      </a>
+      </form>
     </div>
   </aside>
 

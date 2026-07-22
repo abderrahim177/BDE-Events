@@ -37,19 +37,20 @@ class AuthController extends Controller
     if (Auth::attempt($credentials)) {
         $request->session()->regenerate();
         if (Auth::user()->role === 'admin') {
-            return redirect()->route('/admin');
+            return redirect()->route('admin.dashboard');
         }
-        return redirect()->route('/students'); 
+        return redirect()->route('students.dashboard'); 
     }
     return back()->withErrors([
         'email' => 'Vos identifiants sont incorrects !',
     ]);
 }
 
-    // public function logout(Request $request){
-    //     Auth::logout();
-    //     $request->session()->invalidate();
-    //     $request->session()->regenerateToken();
-    //     return redirect('/login')->with('success', 'Logged out successfully!');
-    // }
+    public function logout()
+    {
+        Auth::logout();
+        session()->invalidate();
+        session()->regenerateToken();
+        return redirect()->route('login')->with('success', 'Logged out successfully!');
+    }
 }
