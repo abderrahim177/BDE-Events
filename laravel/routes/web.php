@@ -35,6 +35,10 @@ Route::middleware(['auth', RoleMiddleware::class . ':admin'])->group(function ()
     Route::get('/admin', function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
+    
+    Route::get('/reservations', [CreateEvenmentController::class, 'index'])->name('admin.reservations.index');
+    
+    Route::patch('/reservations/{id}/status', [CreateEvenmentController::class, 'updateStatus'])->name('admin.reservations.updateStatus');
 });
 
 Route::middleware('auth')->group(function (){

@@ -59,7 +59,7 @@
         const toast = document.getElementById('toast-success');
         if (toast) {
             toast.classList.add('opacity-0', '-translate-y-4');
-            setTimeout(() => toast.remove(), 500); // حذفه بعد انتهاء الأنيميشن
+            setTimeout(() => toast.remove(), 500); 
         }
     }
 </script>
@@ -85,7 +85,7 @@
                 <a href="#" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-normal">
                     <i class="fa-solid fa-calendar-days w-4 text-center text-xs"></i> Événements
                 </a>
-                <a href="#" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-normal">
+                <a href="{{route ('admin.reservations.index')}}" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-normal">
                     <i class="fa-solid fa-ticket w-4 text-center text-xs"></i> Réservations
                 </a>
                 <a href="#" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-normal">
