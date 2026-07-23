@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="h-full">
 
 <head>
     <meta charset="UTF-8">
@@ -47,19 +47,19 @@
     </style>
 </head>
 
-<body class="bg-slate-50 text-slate-800 antialiased selection:bg-indigo-500 selection:text-white">
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-indigo-500 selection:text-white h-full overflow-hidden">
 
-    <div class="flex min-h-screen">
+    <div class="flex h-screen overflow-hidden">
 
-        <aside class="hidden lg:flex lg:flex-col w-64 bg-slate-900 text-slate-300 shrink-0 border-r border-slate-800">
-            <div class="flex items-center gap-3 px-6 h-16 border-b border-white/10">
+        <aside class="hidden lg:flex lg:flex-col w-64 bg-slate-900 text-slate-300 shrink-0 border-r border-slate-800 h-full">
+            <div class="flex items-center gap-3 px-6 h-16 shrink-0 border-b border-white/10">
                 <div class="w-8 h-8 rounded-xl bg-indigo-600 flex items-center justify-center shadow-md shadow-indigo-600/30">
                     <i class="fa-solid fa-calendar-days text-white text-xs"></i>
                 </div>
                 <span class="text-white text-sm font-bold tracking-tight">BDE-Events</span>
             </div>
 
-            <nav class="flex-1 px-3 py-6 space-y-1">
+            <nav class="flex-1 px-3 py-6 space-y-1 overflow-y-auto">
                 <p class="px-3 text-[10px] font-semibold tracking-widest text-slate-500 uppercase mb-2">Menu</p>
                 <a href="{{ route('students.dashboard') }}" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium">
                     <i class="fa-solid fa-compass w-4 text-center text-xs text-slate-400"></i> Découvrir
@@ -72,7 +72,7 @@
                 </a>
             </nav>
 
-            <div class="px-3 pb-5">
+            <div class="px-3 pb-5 mt-auto shrink-0">
                 <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-800/50 border border-slate-800">
                     <img src="https://i.pravatar.cc/64?img=47" class="w-9 h-9 rounded-full object-cover ring-2 ring-indigo-500/30">
                     <div class="flex-1 min-w-0">
@@ -81,7 +81,7 @@
                     </div>
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <button type="submit" class="text-slate-400 hover:text-red-400 transition-colors p-1">
+                        <button type="submit" class="text-slate-400 hover:text-red-400 transition-colors p-1" title="Déconnexion">
                             <i class="fa-solid fa-arrow-right-from-bracket text-xs"></i>
                         </button>
                     </form>
@@ -89,9 +89,9 @@
             </div>
         </aside>
 
-        <div class="flex-1 flex flex-col min-w-0">
+        <div class="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
 
-            <header class="h-16 shrink-0 bg-white/80 backdrop-blur-md border-b border-slate-200/80 sticky top-0 z-20 flex items-center justify-between px-5 lg:px-8">
+            <header class="h-16 shrink-0 bg-white/80 backdrop-blur-md border-b border-slate-200/80 z-20 flex items-center justify-between px-5 lg:px-8">
                 <div class="relative w-full max-w-xs hidden sm:block">
                     <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
                     <input type="text" placeholder="Rechercher un billet..."
@@ -115,7 +115,7 @@
                 </div>
             </header>
 
-            <main class="flex-1 p-5 lg:p-8 space-y-8 max-w-7xl w-full mx-auto">
+            <main class="flex-1 overflow-y-auto p-5 lg:p-8 space-y-8 max-w-7xl w-full mx-auto">
 
                 <div>
                     <h1 class="text-2xl font-bold text-slate-900 tracking-tight">Mes Billets</h1>
@@ -164,7 +164,6 @@
                                 </h2>
                             </div>
 
-                            
                             <div class="grid grid-cols-2 gap-4 mb-6 bg-slate-900/60 p-3.5 rounded-2xl border border-slate-800/80">
                                 <div>
                                     <p class="text-[9px] font-medium text-slate-400 uppercase tracking-wider">Date & Heure</p>
@@ -182,14 +181,12 @@
                                 </div>
                             </div>
 
-                           
                             <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between gap-3">
                                 <div>
                                     <p class="text-[9px] font-medium text-slate-400 uppercase tracking-wider">Titulaire</p>
                                     <p class="text-xs font-bold text-white tracking-wide mt-0.5 truncate">{{ $reservation->user->name }}</p>
                                 </div>
 
-                             
                                 <a href=""
                                     class="inline-flex items-center gap-2 px-3.5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-semibold transition-all shadow-lg shadow-indigo-600/25 active:scale-95 shrink-0">
                                     <i class="fa-solid fa-file-arrow-down text-xs"></i>

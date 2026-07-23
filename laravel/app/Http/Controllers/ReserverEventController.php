@@ -7,10 +7,8 @@ use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-class ReserverEventController extends Controller
-{
-    public function store($id)
-    {
+class ReserverEventController extends Controller{
+    public function store($id){
         $event = Event::findOrFail($id);
         $existingReservation = Reservation::where('user_id', Auth::id())
                                           ->where('event_id', $event->id)
@@ -30,6 +28,5 @@ class ReserverEventController extends Controller
         return redirect()->back()->with('success', 'Réservation effectuée avec succès ! Code: ' . $ticketRef);
     }
     public function myTickets(){
-
     }
 }
