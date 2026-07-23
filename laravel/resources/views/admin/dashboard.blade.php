@@ -65,36 +65,42 @@
 </script>
 @endif
 
-<body class="bg-slate-50 text-slate-800 antialiased">
+<body class="bg-slate-50 text-slate-800 antialiased overflow-hidden">
 
-    <div class="flex min-h-screen">
+    <!-- MAIN CONTAINER (Fixed height 100vh) -->
+    <div class="flex h-screen overflow-hidden">
 
-        <!-- SIDEBAR -->
-        <aside class="hidden lg:flex lg:flex-col w-64 bg-slate-900 text-slate-300 shrink-0">
-            <div class="flex items-center gap-3 px-6 h-16 border-b border-white/10">
-                <div class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center">
-                    <i class="fa-solid fa-calendar-days text-white text-xs"></i>
+        <!-- SIDEBAR (Fixed height, no scroll) -->
+        <aside class="hidden lg:flex lg:flex-col w-64 bg-slate-900 text-slate-300 shrink-0 h-full justify-between">
+            <div>
+                <!-- LOGO HEADER -->
+                <div class="flex items-center gap-3 px-6 h-16 border-b border-white/10 shrink-0">
+                    <div class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center">
+                        <i class="fa-solid fa-calendar-days text-white text-xs"></i>
+                    </div>
+                    <span class="text-white text-sm font-medium tracking-tight">BDE-Events</span>
                 </div>
-                <span class="text-white text-sm font-medium tracking-tight">BDE-Events</span>
+
+                <!-- NAVIGATION -->
+                <nav class="px-3 py-6 space-y-1">
+                    <p class="px-3 text-[10px] font-medium tracking-widest text-slate-500 uppercase mb-2">Menu</p>
+                    <a href="#" class="nav-item nav-active flex items-center gap-3 px-3 py-2.5 rounded-lg text-white text-sm font-normal">
+                        <i class="fa-solid fa-chart-simple w-4 text-center text-xs"></i> Vue d'ensemble
+                    </a>
+                    <a href="#" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-normal">
+                        <i class="fa-solid fa-calendar-days w-4 text-center text-xs"></i> Événements
+                    </a>
+                    <a href="{{route ('admin.reservations.index')}}" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-normal">
+                        <i class="fa-solid fa-ticket w-4 text-center text-xs"></i> Réservations
+                    </a>
+                    <a href="#" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-normal">
+                        <i class="fa-solid fa-gear w-4 text-center text-xs"></i> Paramètres
+                    </a>
+                </nav>
             </div>
 
-            <nav class="flex-1 px-3 py-6 space-y-1">
-                <p class="px-3 text-[10px] font-medium tracking-widest text-slate-500 uppercase mb-2">Menu</p>
-                <a href="#" class="nav-item nav-active flex items-center gap-3 px-3 py-2.5 rounded-lg text-white text-sm font-normal">
-                    <i class="fa-solid fa-chart-simple w-4 text-center text-xs"></i> Vue d'ensemble
-                </a>
-                <a href="#" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-normal">
-                    <i class="fa-solid fa-calendar-days w-4 text-center text-xs"></i> Événements
-                </a>
-                <a href="{{route ('admin.reservations.index')}}" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-normal">
-                    <i class="fa-solid fa-ticket w-4 text-center text-xs"></i> Réservations
-                </a>
-                <a href="#" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-normal">
-                    <i class="fa-solid fa-gear w-4 text-center text-xs"></i> Paramètres
-                </a>
-            </nav>
-
-            <div class="px-3 pb-5">
+            <!-- USER FOOTER (Pinned to bottom) -->
+            <div class="px-3 pb-5 shrink-0">
                 <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-800/50 border border-slate-800">
                     <img src="https://i.pravatar.cc/64?img=47" class="w-9 h-9 rounded-full object-cover ring-2 ring-indigo-500/30">
                     <div class="flex-1 min-w-0">
@@ -103,7 +109,7 @@
                     </div>
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <button type="submit" class="text-slate-400 hover:text-red-400 transition-colors p-1">
+                        <button type="submit" class="text-slate-400 hover:text-red-400 transition-colors p-1 flex items-center">
                             <i class="fa-solid fa-arrow-right-from-bracket text-xs"></i>
                         </button>
                     </form>
@@ -111,11 +117,11 @@
             </div>
         </aside>
 
-        <!-- MAIN -->
-        <div class="flex-1 flex flex-col min-w-0">
+        <!-- MAIN WRAPPER -->
+        <div class="flex-1 flex flex-col min-w-0 h-full">
 
-            <!-- HEADER -->
-            <header class="h-16 shrink-0 bg-white border-b border-slate-200 flex items-center justify-between px-5 lg:px-8">
+            <!-- HEADER (Fixed) -->
+            <header class="h-16 shrink-0 bg-white border-b border-slate-200 flex items-center justify-between px-5 lg:px-8 z-10">
                 <div class="relative w-full max-w-xs hidden sm:block">
                     <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
                     <input type="text" placeholder="Rechercher un événement, un étudiant..."
@@ -139,8 +145,8 @@
                 </div>
             </header>
 
-            <!-- CONTENT -->
-            <main class="flex-1 p-5 lg:p-8 space-y-8">
+            <!-- CONTENT AREA (Only this part scrolls) -->
+            <main class="flex-1 overflow-y-auto p-5 lg:p-8 space-y-8">
 
                 <div>
                     <h1 class="text-xl font-semibold text-slate-900 tracking-tight">Vue d'ensemble</h1>
@@ -267,7 +273,7 @@
                 </div>
 
                 <!-- CAPACITY TRACKING TABLE -->
-                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden mb-6">
                     <div class="flex items-center justify-between px-6 lg:px-8 py-5 border-b border-slate-100">
                         <div>
                             <h2 class="text-base font-semibold text-slate-900 tracking-tight">Suivi des capacités</h2>
@@ -306,7 +312,7 @@
                                         $maxCapacity = (int) ($item->max_capacity ?? 0);
                                         $percentage = $maxCapacity > 0 ? min(100, round(($registeredCount / $maxCapacity) * 100)) : 0;
                                         @endphp
-                                        <div class="flex items-center gap-3 mb-4">
+                                        <div class="flex items-center gap-3">
                                             <div class="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
                                                 <div class="h-full bg-indigo-600 rounded-full transition-all duration-500"
                                                     style="width: {{ $percentage . '%'}}"></div>
@@ -330,13 +336,14 @@
             </main>
         </div>
     </div>
+
     @if (session('success'))
     <script>
         Toast = Swal.mixin({
             toast: true,
-            position: 'top-end', // كيطلع الفوق فـ اليمين
+            position: 'top-end',
             showConfirmButton: false,
-            timer: 3000, // كيمشي بوحده بعد 3 ثواني
+            timer: 3000,
             timerProgressBar: true,
             didOpen: (toast) => {
                 toast.addEventListener('mouseenter', Swal.stopTimer)
