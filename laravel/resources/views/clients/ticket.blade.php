@@ -204,7 +204,7 @@
 
                             <div class="text-center">
                                 <p class="text-[9px] font-medium text-slate-500 uppercase tracking-widest mb-0.5">Référence</p>
-                                <span class="font-mono text-xs font-bold text-indigo-400 tracking-wider select-all">
+                                <span class="font-mono text-[14px] font-bold text-indigo-400 tracking-wider select-all">
                                     {{ $reservation->ticket_reference }}
                                 </span>
                             </div>

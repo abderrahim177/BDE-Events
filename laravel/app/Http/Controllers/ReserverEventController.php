@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use App\Models\Reservation;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 class ReserverEventController extends Controller{
@@ -19,7 +18,7 @@ class ReserverEventController extends Controller{
         if ($event->reservations()->count() >= $event->max_capacity) {
             return redirect()->back()->with('error', 'Désolé, cet événement est complet !');
         }
-        $ticketRef = 'BDE-'. NOW() . strtoupper(Str::random(8));
+        $ticketRef = 'BDE-'. now()->format('Y') . '-' . Str::upper(Str::random(8));
         Reservation::create([
             'user_id'          => Auth::id(),
             'event_id'         => $event->id,

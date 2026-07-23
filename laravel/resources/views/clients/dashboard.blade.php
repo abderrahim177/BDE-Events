@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="h-full">
 
 <head>
     <meta charset="UTF-8">
@@ -70,12 +70,14 @@
     }
 </script>
 @endif
-<body class="bg-slate-50 text-slate-800 antialiased">
 
-    <div class="flex min-h-screen">
+<body class="bg-slate-50 text-slate-800 antialiased h-full overflow-hidden">
 
-        <aside class="hidden lg:flex lg:flex-col w-64 bg-slate-900 text-slate-300 shrink-0">
-            <div class="flex items-center gap-3 px-6 h-16 border-b border-white/10">
+    <div class="flex h-screen overflow-hidden">
+
+        <!-- ASIDE: Fixed h-full with scrollable nav if needed -->
+        <aside class="hidden lg:flex lg:flex-col w-64 bg-slate-900 text-slate-300 shrink-0 h-full overflow-y-auto">
+            <div class="flex items-center gap-3 px-6 h-16 border-b border-white/10 shrink-0">
                 <div class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center">
                     <i class="fa-solid fa-calendar-days text-white text-xs"></i>
                 </div>
@@ -95,7 +97,7 @@
                 </a>
             </nav>
 
-            <div class="px-3 pb-5">
+            <div class="px-3 pb-5 shrink-0">
                 <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-800/50 border border-slate-800">
                     <img src="https://i.pravatar.cc/64?img=47" class="w-9 h-9 rounded-full object-cover ring-2 ring-indigo-500/30">
                     <div class="flex-1 min-w-0">
@@ -111,8 +113,11 @@
                 </div>
             </div>
         </aside>
-        <div class="flex-1 flex flex-col min-w-0">
 
+        <!-- MAIN AREA -->
+        <div class="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
+
+            <!-- HEADER: Fixed top -->
             <header class="h-16 shrink-0 bg-white border-b border-slate-200 flex items-center justify-between px-5 lg:px-8">
                 <div class="relative w-full max-w-xs hidden sm:block">
                     <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
@@ -137,7 +142,8 @@
                 </div>
             </header>
 
-            <main class="flex-1 p-5 lg:p-8 space-y-8">
+            <!-- MAIN CONTENT: Scrollable independent area -->
+            <main class="flex-1 overflow-y-auto p-5 lg:p-8 space-y-8">
 
                 <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
                     <div>
@@ -181,7 +187,7 @@
                             <div class="flex items-center gap-3 mb-4">
                                 <div class="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
                                     <div class="h-full bg-indigo-600 rounded-full transition-all duration-500"
-                                        style="width: {{ $percentage . '%'}}"></div>
+                                        style="width: {{ $percentage }}%"></div>
                                 </div>
 
                                 <span class="text-[11px] font-medium text-slate-500 whitespace-nowrap">
@@ -195,9 +201,11 @@
                         </div>
                     </div>
                     @endforeach
+                </div>
             </main>
         </div>
     </div>
+
 @if (session('success'))
 <script>
     Toast = Swal.mixin({
