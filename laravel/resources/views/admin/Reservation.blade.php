@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- SweetAlert2 CDN -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         body {
@@ -44,9 +43,7 @@
 
     <div class="flex min-h-screen">
 
-        <!-- ADMIN SIDEBAR -->
-        <aside class="hidden lg:flex lg:flex-col w-64 bg-slate-900 text-slate-300 shrink-0 border-r border-slate-800">
-            <!-- Brand Logo -->
+=        <aside class="hidden lg:flex lg:flex-col w-64 bg-slate-900 text-slate-300 shrink-0 border-r border-slate-800">
             <div class="flex items-center gap-3 px-6 h-16 border-b border-white/10">
                 <div class="w-8 h-8 rounded-xl bg-indigo-600 flex items-center justify-center shadow-md shadow-indigo-600/30">
                     <i class="fa-solid fa-shield-halved text-white text-xs"></i>
@@ -57,7 +54,6 @@
                 </div>
             </div>
 
-            <!-- Navigation Links -->
             <nav class="flex-1 px-3 py-6 space-y-1">
                 <p class="px-3 text-[10px] font-semibold tracking-widest text-slate-500 uppercase mb-2">Gestion</p>
                 
@@ -78,7 +74,6 @@
                 </a>
             </nav>
 
-            <!-- User Footer Profile -->
             <div class="px-3 pb-5">
                 <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-800/50 border border-slate-800">
                     <img src="https://i.pravatar.cc/64?img=68" class="w-9 h-9 rounded-full object-cover ring-2 ring-indigo-500/30">
@@ -96,19 +91,15 @@
             </div>
         </aside>
 
-        <!-- MAIN CONTAINER -->
         <div class="flex-1 flex flex-col min-w-0">
 
-            <!-- ADMIN HEADER -->
             <header class="h-16 shrink-0 bg-white/80 backdrop-blur-md border-b border-slate-200/80 sticky top-0 z-20 flex items-center justify-between px-5 lg:px-8">
-                <!-- Global Search -->
                 <div class="relative w-full max-w-xs hidden sm:block">
                     <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
                     <input type="text" placeholder="Rechercher étudiant, référence..."
                         class="w-full pl-9 pr-3 py-2 rounded-xl border border-slate-200 bg-slate-50/80 text-xs font-medium placeholder:text-slate-400 outline-none transition-all duration-200 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 focus:bg-white">
                 </div>
 
-                <!-- Right Header Actions -->
                 <div class="flex items-center gap-4 ml-auto">
                     <button class="relative w-9 h-9 rounded-xl hover:bg-slate-100 flex items-center justify-center transition-all duration-200">
                         <i class="fa-regular fa-bell text-slate-600 text-sm"></i>
@@ -128,10 +119,8 @@
                 </div>
             </header>
 
-            <!-- PAGE CONTENT -->
             <main class="flex-1 p-5 lg:p-8 space-y-6 max-w-7xl w-full mx-auto">
 
-                <!-- Page Title -->
                 <div class="flex items-center justify-between">
                     <div>
                         <h1 class="text-2xl font-bold text-slate-900 tracking-tight">Gestion des Réservations</h1>
@@ -139,7 +128,6 @@
                     </div>
                 </div>
 
-                <!-- Alert Message -->
                 @if(session('success'))
                     <div class="p-4 bg-emerald-50 border border-emerald-200 text-emerald-700 rounded-xl text-xs font-medium flex items-center gap-2">
                         <i class="fa-solid fa-circle-check text-emerald-500 text-sm"></i>
@@ -147,7 +135,6 @@
                     </div>
                 @endif
 
-                <!-- TABLE CARD -->
                 <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
                     <div class="overflow-x-auto">
                         <table class="w-full text-left border-collapse text-sm">
@@ -164,18 +151,15 @@
                                 @forelse ($reservations as $reservation)
                                 <tr class="hover:bg-slate-50/50 transition-colors">
                                     
-                                    <!-- Reference -->
                                     <td class="p-4 font-mono font-bold text-indigo-600">
                                         {{ $reservation->ticket_reference }}
                                     </td>
 
-                                    <!-- User -->
                                     <td class="p-4">
                                         <p class="font-semibold text-slate-800">{{ $reservation->user->name }}</p>
                                         <p class="text-xs text-slate-400 font-normal">{{ $reservation->user->email }}</p>
                                     </td>
 
-                                    <!-- Event -->
                                     <td class="p-4">
                                         <p class="font-medium text-slate-800">{{ $reservation->event->title }}</p>
                                         <p class="text-xs text-slate-400 font-normal">
@@ -183,7 +167,6 @@
                                         </p>
                                     </td>
 
-                                    <!-- Current Status Badge -->
                                     <td class="p-4">
                                         @if($reservation->status === 'confirmé')
                                             <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-600 border border-emerald-200 rounded-full text-xs font-semibold">
@@ -200,7 +183,6 @@
                                         @endif
                                     </td>
 
-                                    <!-- Actions Form -->
                                     <td class="p-4 text-center">
                                         <form action="{{ route('admin.reservations.updateStatus', $reservation->id) }}" method="POST" class="inline-flex items-center justify-center">
                                             @csrf
@@ -230,7 +212,6 @@
                     </div>
                 </div>
 
-                <!-- Pagination -->
                 @if(method_exists($reservations, 'links'))
                 <div class="mt-4">
                     {{ $reservations->links() }}

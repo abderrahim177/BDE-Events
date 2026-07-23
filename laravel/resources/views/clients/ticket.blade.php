@@ -115,7 +115,6 @@
                 </div>
             </header>
 
-            <!-- CONTENT -->
             <main class="flex-1 p-5 lg:p-8 space-y-8 max-w-7xl w-full mx-auto">
 
                 <div>
@@ -190,7 +189,7 @@
                                     <p class="text-xs font-bold text-white tracking-wide mt-0.5 truncate">{{ $reservation->user->name }}</p>
                                 </div>
 
-                               <!-- {{ route('ticket.download', $reservation->id) }} -->
+                             
                                 <a href=""
                                     class="inline-flex items-center gap-2 px-3.5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-semibold transition-all shadow-lg shadow-indigo-600/25 active:scale-95 shrink-0">
                                     <i class="fa-solid fa-file-arrow-down text-xs"></i>
@@ -200,15 +199,12 @@
 
                         </div>
 
-                        <!-- RIGHT SECTION: Code Stub (30% width) -->
                         <div class="w-full md:w-[30%] bg-[#070d1d] p-6 flex flex-col items-center justify-center gap-3 relative border-t md:border-t-0 border-slate-800">
 
-                            <!-- Visual QR Code Mockup -->
                             <div class="w-16 h-16 bg-white p-1.5 rounded-xl shadow-lg flex items-center justify-center">
                                 <i class="fa-solid fa-qrcode text-3xl text-slate-900"></i>
                             </div>
 
-                            <!-- Reference Code -->
                             <div class="text-center">
                                 <p class="text-[9px] font-medium text-slate-500 uppercase tracking-widest mb-0.5">Référence</p>
                                 <span class="font-mono text-xs font-bold text-indigo-400 tracking-wider select-all">
@@ -217,7 +213,6 @@
                             </div>
                         </div>
 
-                        <!-- ✂️ CUTOUT NOTCHES (مطابقة لـ bg-slate-50 ديال الصفحة) -->
                         <div class="hidden md:block absolute -bottom-4 left-[70%] -translate-x-1/2 w-8 h-8 bg-slate-50 rounded-full z-10"></div>
                         <div class="hidden md:block absolute -top-4 left-[70%] -translate-x-1/2 w-8 h-8 bg-slate-50 rounded-full z-10"></div>
 
