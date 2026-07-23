@@ -16,19 +16,19 @@ class TecketController extends Controller
             ->get();
         return view('clients.ticket', compact('reservations'));               
     }
-    public function download($id)
-{
-    $reservation = Reservation::with(['event', 'user'])
-        ->where('id', $id)
-        ->where('user_id', Auth::id())
-        ->firstOrFail();
+//     public function download($id)
+// {
+//     $reservation = Reservation::with(['event', 'user'])
+//         ->where('id', $id)
+//         ->where('user_id', Auth::id())
+//         ->firstOrFail();
 
-    $reservations = collect([$reservation]);
+//     $reservations = collect([$reservation]);
 
-    $pdfView = view('clients.ticket', compact('reservations'))->render();
+//     $pdfView = view('clients.ticket', compact('reservations'))->render();
 
-    $pdf = Pdf::loadHTML($pdfView)->setPaper('a4', 'portrait');
+//     $pdf = Pdf::loadHTML($pdfView)->setPaper('a4', 'portrait');
 
-    return $pdf->download('Ticket-' . $reservation->ticket_reference . '.pdf');
-}
+//     return $pdf->download('Ticket-' . $reservation->ticket_reference . '.pdf');
+// }
 }

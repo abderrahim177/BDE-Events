@@ -40,7 +40,6 @@
             background: #4f46e5;
         }
 
-        /* Subtle grid background pattern for the tickets */
         .bg-grid-pattern {
             background-size: 24px 24px;
             background-image: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
@@ -52,7 +51,6 @@
 
     <div class="flex min-h-screen">
 
-        <!-- SIDEBAR -->
         <aside class="hidden lg:flex lg:flex-col w-64 bg-slate-900 text-slate-300 shrink-0 border-r border-slate-800">
             <div class="flex items-center gap-3 px-6 h-16 border-b border-white/10">
                 <div class="w-8 h-8 rounded-xl bg-indigo-600 flex items-center justify-center shadow-md shadow-indigo-600/30">
@@ -91,10 +89,8 @@
             </div>
         </aside>
 
-        <!-- MAIN -->
         <div class="flex-1 flex flex-col min-w-0">
 
-            <!-- HEADER -->
             <header class="h-16 shrink-0 bg-white/80 backdrop-blur-md border-b border-slate-200/80 sticky top-0 z-20 flex items-center justify-between px-5 lg:px-8">
                 <div class="relative w-full max-w-xs hidden sm:block">
                     <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
@@ -130,13 +126,10 @@
                 <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
 
                     @forelse ($reservations as $reservation)
-                    <!-- MODERN TICKET CARD -->
                     <div class="bg-[#0b1329] bg-grid-pattern rounded-3xl overflow-hidden text-white flex flex-col md:flex-row shadow-2xl relative border border-slate-800/80 hover:border-slate-700/80 transition-all duration-300 group">
 
-                        <!-- LEFT SECTION: Details (70% width) -->
                         <div class="w-full md:w-[70%] p-6 sm:p-7 flex flex-col justify-between border-b md:border-b-0 md:border-r-2 border-dashed border-slate-800 relative z-0">
 
-                            <!-- Header: App Brand & Dynamic Status -->
                             <div class="flex items-center justify-between mb-6">
                                 <div class="flex items-center gap-3">
                                     <span class="w-9 h-9 rounded-xl bg-indigo-600/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400 shadow-inner">
@@ -145,7 +138,6 @@
                                     <span class="text-xs font-bold tracking-wider uppercase text-slate-300">BDE-Events</span>
                                 </div>
 
-                                <!-- Dynamic Status Badge -->
                                 <div>
                                     @if($reservation->status === 'confirmé')
                                     <span class="inline-flex items-center gap-1.5 text-[11px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-3 py-1 rounded-full backdrop-blur-md">
@@ -166,7 +158,6 @@
                                 </div>
                             </div>
 
-                            <!-- Event Title -->
                             <div class="mb-6">
                                 <p class="text-[10px] font-semibold text-indigo-400 uppercase tracking-widest mb-1">Événement</p>
                                 <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight leading-snug group-hover:text-indigo-200 transition-colors">
@@ -174,7 +165,7 @@
                                 </h2>
                             </div>
 
-                            <!-- Date, Time & Location -->
+                            
                             <div class="grid grid-cols-2 gap-4 mb-6 bg-slate-900/60 p-3.5 rounded-2xl border border-slate-800/80">
                                 <div>
                                     <p class="text-[9px] font-medium text-slate-400 uppercase tracking-wider">Date & Heure</p>
@@ -192,15 +183,15 @@
                                 </div>
                             </div>
 
-                            <!-- Footer: Titulaire + Pro Download Button -->
+                           
                             <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between gap-3">
                                 <div>
                                     <p class="text-[9px] font-medium text-slate-400 uppercase tracking-wider">Titulaire</p>
                                     <p class="text-xs font-bold text-white tracking-wide mt-0.5 truncate">{{ $reservation->user->name }}</p>
                                 </div>
 
-                                <!-- Modern PDF Download Link -->
-                                <a href="{{ route('ticket.download', $reservation->id) }}"
+                               <!-- {{ route('ticket.download', $reservation->id) }} -->
+                                <a href=""
                                     class="inline-flex items-center gap-2 px-3.5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-semibold transition-all shadow-lg shadow-indigo-600/25 active:scale-95 shrink-0">
                                     <i class="fa-solid fa-file-arrow-down text-xs"></i>
                                     <span>Télécharger PDF</span>

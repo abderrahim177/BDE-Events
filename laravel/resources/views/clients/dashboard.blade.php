@@ -74,7 +74,6 @@
 
     <div class="flex min-h-screen">
 
-        <!-- SIDEBAR -->
         <aside class="hidden lg:flex lg:flex-col w-64 bg-slate-900 text-slate-300 shrink-0">
             <div class="flex items-center gap-3 px-6 h-16 border-b border-white/10">
                 <div class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center">
@@ -112,10 +111,8 @@
                 </div>
             </div>
         </aside>
-        <!-- MAIN -->
         <div class="flex-1 flex flex-col min-w-0">
 
-            <!-- HEADER -->
             <header class="h-16 shrink-0 bg-white border-b border-slate-200 flex items-center justify-between px-5 lg:px-8">
                 <div class="relative w-full max-w-xs hidden sm:block">
                     <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
@@ -140,7 +137,6 @@
                 </div>
             </header>
 
-            <!-- CONTENT -->
             <main class="flex-1 p-5 lg:p-8 space-y-8">
 
                 <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
@@ -157,10 +153,8 @@
                     </div>
                 </div>
 
-                <!-- EVENTS GRID -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
 
-                    <!-- CARD 1 - FREE -->
                     @foreach ($evenment as $event)
                     <div class="event-card bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-md">
                         <div class="h-32 bg-gradient-to-br from-indigo-600 to-slate-900 relative flex items-center justify-center">
@@ -180,16 +174,14 @@
                                 </p>
                             </div>
                             @php
-                            // استعمل reservations_count بالجمع بـ نفس سمية العلاقة
                             $registeredCount = (int) ($event->reservations_count ?? 0);
                             $maxCapacity = (int) ($event->max_capacity ?? 0);
-
                             $percentage = $maxCapacity > 0 ? min(100, round(($registeredCount / $maxCapacity) * 100)) : 0;
                             @endphp
                             <div class="flex items-center gap-3 mb-4">
                                 <div class="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
                                     <div class="h-full bg-indigo-600 rounded-full transition-all duration-500"
-                                        style="width: {{ $percentage . '%' }}"></div>
+                                        style="width: {{ $percentage . '%'}}"></div>
                                 </div>
 
                                 <span class="text-[11px] font-medium text-slate-500 whitespace-nowrap">

@@ -21,7 +21,7 @@ class ReserverEventController extends Controller
         if ($event->reservations()->count() >= $event->max_capacity) {
             return redirect()->back()->with('error', 'Désolé, cet événement est complet !');
         }
-        $ticketRef = 'BDE-' . strtoupper(Str::random(8));
+        $ticketRef = 'BDE-'. NOW() . strtoupper(Str::random(8));
         Reservation::create([
             'user_id'          => Auth::id(),
             'event_id'         => $event->id,

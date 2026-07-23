@@ -59,11 +59,12 @@
         const toast = document.getElementById('toast-success');
         if (toast) {
             toast.classList.add('opacity-0', '-translate-y-4');
-            setTimeout(() => toast.remove(), 500); 
+            setTimeout(() => toast.remove(), 500);
         }
     }
 </script>
 @endif
+
 <body class="bg-slate-50 text-slate-800 antialiased">
 
     <div class="flex min-h-screen">
@@ -289,95 +290,38 @@
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-slate-100">
-
+                                @foreach ($Event as $item)
                                 <tr class="hover:bg-slate-50/60 transition-all duration-200">
                                     <td class="px-6 lg:px-8 py-4">
-                                        <p class="font-medium text-slate-800">Soirée d'intégration BDE</p>
-                                        <p class="text-xs font-light text-slate-400">Amphithéâtre A</p>
+                                        <p class="font-medium text-slate-800">{{$item->title}}</p>
+                                        <p class="text-xs font-light text-slate-400">{{$item->location}}</p>
                                     </td>
-                                    <td class="px-4 py-4 text-slate-500 font-light">12 Sept 2026</td>
+                                    <td class="px-4 py-4 text-slate-500 font-light">{{$item->date_time}}</td>
                                     <td class="px-4 py-4">
                                         <span class="text-[11px] font-medium bg-emerald-50 text-emerald-600 px-2 py-1 rounded-full">Gratuit</span>
                                     </td>
                                     <td class="px-4 py-4">
-                                        <div class="flex items-center gap-2">
-                                            <div class="flex-1 h-1.5 bg-slate-100 rounded-full overflow-hidden">
-                                                <div class="h-full bg-indigo-600 rounded-full" style="width: 68%"></div>
+                                        @php
+                                        $registeredCount = (int) ($item->reservations_count ?? 0);
+                                        $maxCapacity = (int) ($item->max_capacity ?? 0);
+                                        $percentage = $maxCapacity > 0 ? min(100, round(($registeredCount / $maxCapacity) * 100)) : 0;
+                                        @endphp
+                                        <div class="flex items-center gap-3 mb-4">
+                                            <div class="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
+                                                <div class="h-full bg-indigo-600 rounded-full transition-all duration-500"
+                                                    style="width: {{ $percentage . '%'}}"></div>
                                             </div>
-                                            <span class="text-xs font-light text-slate-500 w-16 text-right">64/200</span>
+
+                                            <span class="text-[11px] font-medium text-slate-500 whitespace-nowrap">
+                                                <span class="text-indigo-600 font-semibold">{{ $registeredCount }}</span> / {{ $item->max_capacity }} places
+                                            </span>
                                         </div>
                                     </td>
                                     <td class="px-4 py-4">
                                         <span class="text-[11px] font-medium bg-indigo-50 text-indigo-600 px-2 py-1 rounded-full">Ouvert</span>
                                     </td>
                                 </tr>
-
-                                <tr class="hover:bg-slate-50/60 transition-all duration-200">
-                                    <td class="px-6 lg:px-8 py-4">
-                                        <p class="font-medium text-slate-800">Gala de fin d'année</p>
-                                        <p class="text-xs font-light text-slate-400">Salle des Arts</p>
-                                    </td>
-                                    <td class="px-4 py-4 text-slate-500 font-light">28 Sept 2026</td>
-                                    <td class="px-4 py-4">
-                                        <span class="text-[11px] font-medium bg-amber-50 text-amber-600 px-2 py-1 rounded-full">150 DH</span>
-                                    </td>
-                                    <td class="px-4 py-4">
-                                        <div class="flex items-center gap-2">
-                                            <div class="flex-1 h-1.5 bg-slate-100 rounded-full overflow-hidden">
-                                                <div class="h-full bg-amber-500 rounded-full" style="width: 91%"></div>
-                                            </div>
-                                            <span class="text-xs font-light text-slate-500 w-16 text-right">9/100</span>
-                                        </div>
-                                    </td>
-                                    <td class="px-4 py-4">
-                                        <span class="text-[11px] font-medium bg-amber-50 text-amber-600 px-2 py-1 rounded-full">Presque complet</span>
-                                    </td>
-                                </tr>
-
-                                <tr class="hover:bg-slate-50/60 transition-all duration-200">
-                                    <td class="px-6 lg:px-8 py-4">
-                                        <p class="font-medium text-slate-800">Tournoi sportif inter-filières</p>
-                                        <p class="text-xs font-light text-slate-400">Complexe sportif</p>
-                                    </td>
-                                    <td class="px-4 py-4 text-slate-500 font-light">05 Oct 2026</td>
-                                    <td class="px-4 py-4">
-                                        <span class="text-[11px] font-medium bg-emerald-50 text-emerald-600 px-2 py-1 rounded-full">Gratuit</span>
-                                    </td>
-                                    <td class="px-4 py-4">
-                                        <div class="flex items-center gap-2">
-                                            <div class="flex-1 h-1.5 bg-slate-100 rounded-full overflow-hidden">
-                                                <div class="h-full bg-indigo-600 rounded-full" style="width: 30%"></div>
-                                            </div>
-                                            <span class="text-xs font-light text-slate-500 w-16 text-right">45/150</span>
-                                        </div>
-                                    </td>
-                                    <td class="px-4 py-4">
-                                        <span class="text-[11px] font-medium bg-indigo-50 text-indigo-600 px-2 py-1 rounded-full">Ouvert</span>
-                                    </td>
-                                </tr>
-
-                                <tr class="hover:bg-slate-50/60 transition-all duration-200">
-                                    <td class="px-6 lg:px-8 py-4">
-                                        <p class="font-medium text-slate-800">Conférence Tech & Carrières</p>
-                                        <p class="text-xs font-light text-slate-400">Amphithéâtre B</p>
-                                    </td>
-                                    <td class="px-4 py-4 text-slate-500 font-light">14 Oct 2026</td>
-                                    <td class="px-4 py-4">
-                                        <span class="text-[11px] font-medium bg-emerald-50 text-emerald-600 px-2 py-1 rounded-full">Gratuit</span>
-                                    </td>
-                                    <td class="px-4 py-4">
-                                        <div class="flex items-center gap-2">
-                                            <div class="flex-1 h-1.5 bg-slate-100 rounded-full overflow-hidden">
-                                                <div class="h-full bg-rose-500 rounded-full" style="width: 100%"></div>
-                                            </div>
-                                            <span class="text-xs font-light text-slate-500 w-16 text-right">0/80</span>
-                                        </div>
-                                    </td>
-                                    <td class="px-4 py-4">
-                                        <span class="text-[11px] font-medium bg-rose-50 text-rose-600 px-2 py-1 rounded-full">Complet</span>
-                                    </td>
-                                </tr>
-
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -386,43 +330,43 @@
             </main>
         </div>
     </div>
-@if (session('success'))
-<script>
-    Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end', // كيطلع الفوق فـ اليمين
-        showConfirmButton: false,
-        timer: 3000, // كيمشي بوحده بعد 3 ثواني
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-    });
+    @if (session('success'))
+    <script>
+        Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end', // كيطلع الفوق فـ اليمين
+            showConfirmButton: false,
+            timer: 3000, // كيمشي بوحده بعد 3 ثواني
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        });
 
-    Toast.fire({
-        icon: 'success',
-        title: "{{ session('success') }}"
-    });
-</script>
-@endif
+        Toast.fire({
+            icon: 'success',
+            title: "{{ session('success') }}"
+        });
+    </script>
+    @endif
 
-@if (session('error'))
-<script>
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 4000,
-        timerProgressBar: true
-    });
+    @if (session('error'))
+    <script>
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 4000,
+            timerProgressBar: true
+        });
 
-    Toast.fire({
-        icon: 'error',
-        title: "{{ session('error') }}"
-    });
-</script>
-@endif
+        Toast.fire({
+            icon: 'error',
+            title: "{{ session('error') }}"
+        });
+    </script>
+    @endif
 </body>
 
 </html>

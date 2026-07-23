@@ -35,7 +35,7 @@ Route::middleware(['auth', RoleMiddleware::class . ':admin'])->group(function ()
     Route::get('/admin', function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
-    
+
     Route::get('/reservations', [CreateEvenmentController::class, 'index'])->name('admin.reservations.index');
     
     Route::patch('/reservations/{id}/status', [CreateEvenmentController::class, 'updateStatus'])->name('admin.reservations.updateStatus');
@@ -47,5 +47,6 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/students', [GetAllevenmentController::class, 'index'])->name('students.dashboard');
 Route::get('/reservation/{id}', [ReserverEventController::class, 'store'])->name('reservation');
 Route::get('/ticket' , [TecketController::class , 'store'])->name('Ticket');
-Route::get('/ticket/download/{id}', [TecketController::class, 'download'])->name('ticket.download');
+Route::get('/admin' , [GetAllevenmentController::class , 'DetailEvent']);
+// Route::get('/ticket/download/{id}', [TecketController::class, 'download'])->name('ticket.download');
 });

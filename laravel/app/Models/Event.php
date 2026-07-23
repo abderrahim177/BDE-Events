@@ -30,7 +30,7 @@ class Event extends Model
 {
     return $this->belongsTo(User::class, 'user_id');
 }
-// نجيبو كاع المستخدمين اللي حجزوا فـ هاد الحدث
+// njibo ga3 li hajzo fhad l7adat 
 public function attendees()
 {
     return $this->belongsToMany(User::class, 'reservations')
