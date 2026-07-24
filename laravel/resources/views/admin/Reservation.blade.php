@@ -43,7 +43,7 @@
 
     <div class="flex min-h-screen">
 
-=        <aside class="hidden lg:flex lg:flex-col w-64 bg-slate-900 text-slate-300 shrink-0 border-r border-slate-800">
+      <aside class="hidden lg:flex lg:flex-col w-64 bg-slate-900 text-slate-300 shrink-0 border-r border-slate-800">
             <div class="flex items-center gap-3 px-6 h-16 border-b border-white/10">
                 <div class="w-8 h-8 rounded-xl bg-indigo-600 flex items-center justify-center shadow-md shadow-indigo-600/30">
                     <i class="fa-solid fa-shield-halved text-white text-xs"></i>

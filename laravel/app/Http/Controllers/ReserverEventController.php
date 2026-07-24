@@ -26,6 +26,5 @@ class ReserverEventController extends Controller{
         ]);
         return redirect()->back()->with('success', 'Réservation effectuée avec succès ! Code: ' . $ticketRef);
     }
-    public function myTickets(){
-    }
+
 }
