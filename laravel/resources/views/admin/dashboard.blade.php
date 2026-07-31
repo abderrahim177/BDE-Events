@@ -222,13 +222,13 @@
 
                         <div class="md:col-span-2">
                             <label class="block text-xs font-medium text-slate-600 mb-1.5">Titre de l'événement</label>
-                            <input type="text" name="title" placeholder="Ex : Soirée d'intégration BDE"
+                            <input type="text" name="title" value="{{ old('title') }}" placeholder="Ex : Soirée d'intégration BDE"
                                 class="w-full px-4 py-2.5 rounded-lg border border-slate-200 bg-white text-sm font-normal placeholder:text-slate-400 placeholder:font-light outline-none transition-all duration-200 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500">
                         </div>
 
                         <div class="md:col-span-2">
                             <label class="block text-xs font-medium text-slate-600 mb-1.5">Description</label>
-                            <textarea rows="3" name="description" placeholder="Décrivez l'événement en quelques lignes..."
+                            <textarea rows="3" name="description" value="{{ old('description') }}" placeholder="Décrivez l'événement en quelques lignes..."
                                 class="w-full px-4 py-2.5 rounded-lg border border-slate-200 bg-white text-sm font-normal placeholder:text-slate-400 placeholder:font-light outline-none transition-all duration-200 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 resize-none"></textarea>
                         </div>
 
@@ -236,7 +236,7 @@
                             <label class="block text-xs font-medium text-slate-600 mb-1.5">Date et Heure</label>
                             <div class="relative">
                                 <i class="fa-regular fa-calendar-days absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm pointer-events-none"></i>
-                                <input type="datetime-local" name="datetime"
+                                <input type="datetime-local" value="{{ old('datetime') }}" name="datetime"
                                     class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-slate-200 bg-white text-sm font-normal text-slate-600 outline-none transition-all duration-200 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500">
                             </div>
                         </div>
@@ -245,7 +245,7 @@
                             <label class="block text-xs font-medium text-slate-600 mb-1.5">Lieu</label>
                             <div class="relative">
                                 <i class="fa-solid fa-location-dot absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
-                                <input type="text" name="lieu" placeholder="Ex : Amphithéâtre A"
+                                <input type="text" name="lieu" value="{{ old('lieu') }}" placeholder="Ex : Amphithéâtre A"
                                     class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-slate-200 bg-white text-sm font-normal placeholder:text-slate-400 placeholder:font-light outline-none transition-all duration-200 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500">
                             </div>
                         </div>
@@ -254,7 +254,7 @@
                             <label class="block text-xs font-medium text-slate-600 mb-1.5">Jauge maximale</label>
                             <div class="relative">
                                 <i class="fa-solid fa-users absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
-                                <input type="number" name="max_people" min="1" placeholder="Ex : 200"
+                                <input type="number" name="max_people" value="{{ old('max_people') }}" min="1" placeholder="Ex : 200"
                                     class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-slate-200 bg-white text-sm font-normal placeholder:text-slate-400 placeholder:font-light outline-none transition-all duration-200 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500">
                             </div>
                         </div>
@@ -322,7 +322,15 @@
                                         </div>
                                     </td>
                                     <td class="px-4 py-4">
-                                        <span class="text-[11px] font-medium bg-indigo-50 text-indigo-600 px-2 py-1 rounded-full">Ouvert</span>
+                                        @if($item->isFull())
+                                        <span class="text-[11px] font-medium bg-red-100 text-red-700 px-2 py-1 rounded-full">
+                                            Fermé
+                                        </span>
+                                        @else
+                                        <span class="text-[11px] font-medium bg-indigo-50 text-indigo-600 px-2 py-1 rounded-full">
+                                            Ouvert
+                                        </span>
+                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach
