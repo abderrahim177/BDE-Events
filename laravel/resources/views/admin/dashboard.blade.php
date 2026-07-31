@@ -39,6 +39,7 @@
         }
     </style>
 </head>
+
 @if (session('success'))
 <div id="toast-success" class="fixed top-5 right-5 z-50 flex items-center gap-3 w-full max-w-xs p-4 text-slate-700 bg-white rounded-xl shadow-lg border border-emerald-100 transition-all duration-500 ease-in-out transform translate-y-0 opacity-100">
     <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-emerald-500 bg-emerald-50 rounded-lg">
@@ -67,39 +68,33 @@
 
 <body class="bg-slate-50 text-slate-800 antialiased overflow-hidden">
 
-    <!-- MAIN CONTAINER (Fixed height 100vh) -->
     <div class="flex h-screen overflow-hidden">
 
-        <!-- SIDEBAR (Fixed height, no scroll) -->
-        <aside class="hidden lg:flex lg:flex-col w-64 bg-slate-900 text-slate-300 shrink-0 h-full justify-between">
-            <div>
-                <!-- LOGO HEADER -->
-                <div class="flex items-center gap-3 px-6 h-16 border-b border-white/10 shrink-0">
-                    <div class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center">
-                        <i class="fa-solid fa-calendar-days text-white text-xs"></i>
-                    </div>
-                    <span class="text-white text-sm font-medium tracking-tight">BDE-Events</span>
+        <!-- SIDEBAR (ثابت ومفيهش سكرول مفروض) -->
+        <aside class="hidden lg:flex lg:flex-col w-64 bg-slate-900 text-slate-300 shrink-0 h-screen z-20 sticky top-0">
+            <div class="flex items-center gap-3 px-6 h-16 border-b border-white/10 shrink-0">
+                <div class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center">
+                    <i class="fa-solid fa-calendar-days text-white text-xs"></i>
                 </div>
-
-                <!-- NAVIGATION -->
-                <nav class="px-3 py-6 space-y-1">
-                    <p class="px-3 text-[10px] font-medium tracking-widest text-slate-500 uppercase mb-2">Menu</p>
-                    <a href="#" class="nav-item nav-active flex items-center gap-3 px-3 py-2.5 rounded-lg text-white text-sm font-normal">
-                        <i class="fa-solid fa-chart-simple w-4 text-center text-xs"></i> Vue d'ensemble
-                    </a>
-                    <a href="#" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-normal">
-                        <i class="fa-solid fa-calendar-days w-4 text-center text-xs"></i> Événements
-                    </a>
-                    <a href="{{route ('admin.reservations.index')}}" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-normal">
-                        <i class="fa-solid fa-ticket w-4 text-center text-xs"></i> Réservations
-                    </a>
-                    <a href="#" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-normal">
-                        <i class="fa-solid fa-gear w-4 text-center text-xs"></i> Paramètres
-                    </a>
-                </nav>
+                <span class="text-white text-sm font-medium tracking-tight">BDE-Events</span>
             </div>
 
-            <!-- USER FOOTER (Pinned to bottom) -->
+            <nav class="flex-1 px-3 py-6 space-y-1 overflow-y-auto">
+                <p class="px-3 text-[10px] font-medium tracking-widest text-slate-500 uppercase mb-2">Menu</p>
+                <a href="#" class="nav-item nav-active flex items-center gap-3 px-3 py-2.5 rounded-lg text-white text-sm font-normal">
+                    <i class="fa-solid fa-chart-simple w-4 text-center text-xs"></i> Vue d'ensemble
+                </a>
+                <a href="#" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-normal">
+                    <i class="fa-solid fa-calendar-days w-4 text-center text-xs"></i> Événements
+                </a>
+                <a href="{{route ('admin.reservations.index')}}" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-normal">
+                    <i class="fa-solid fa-ticket w-4 text-center text-xs"></i> Réservations
+                </a>
+                <a href="#" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-normal">
+                    <i class="fa-solid fa-gear w-4 text-center text-xs"></i> Paramètres
+                </a>
+            </nav>
+
             <div class="px-3 pb-5 shrink-0">
                 <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-800/50 border border-slate-800">
                     <img src="https://i.pravatar.cc/64?img=47" class="w-9 h-9 rounded-full object-cover ring-2 ring-indigo-500/30">
@@ -109,7 +104,7 @@
                     </div>
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <button type="submit" class="text-slate-400 hover:text-red-400 transition-colors p-1 flex items-center">
+                        <button type="submit" class="text-slate-400 hover:text-red-400 transition-colors p-1">
                             <i class="fa-solid fa-arrow-right-from-bracket text-xs"></i>
                         </button>
                     </form>
@@ -117,10 +112,10 @@
             </div>
         </aside>
 
-        <!-- MAIN WRAPPER -->
-        <div class="flex-1 flex flex-col min-w-0 h-full">
+        <!-- MAIN CONTAINER -->
+        <div class="flex-1 flex flex-col h-screen min-w-0 overflow-hidden">
 
-            <!-- HEADER (Fixed) -->
+            <!-- HEADER (ثابت الفوق) -->
             <header class="h-16 shrink-0 bg-white border-b border-slate-200 flex items-center justify-between px-5 lg:px-8 z-10">
                 <div class="relative w-full max-w-xs hidden sm:block">
                     <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
@@ -145,7 +140,7 @@
                 </div>
             </header>
 
-            <!-- CONTENT AREA (Only this part scrolls) -->
+            <!-- CONTENT (هو الوحيد اللي كيتسكورلا) -->
             <main class="flex-1 overflow-y-auto p-5 lg:p-8 space-y-8">
 
                 <div>
@@ -212,7 +207,7 @@
                     <form action="{{route('Create_evenment')}}" method="post" class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5">
                         @csrf
                         @if ($errors->any())
-                        <div class="mb-5 p-4 rounded-xl bg-red-50 border border-red-200/60 text-red-600 text-xs font-medium space-y-1">
+                        <div class="mb-5 p-4 rounded-xl bg-red-50 border border-red-200/60 text-red-600 text-xs font-medium space-y-1 md:col-span-2">
                             <div class="flex items-center gap-2 font-semibold text-red-700">
                                 <i class="fa-solid fa-circle-xmark"></i>
                                 <span>Des erreurs sont survenues :</span>
@@ -224,6 +219,7 @@
                             </ul>
                         </div>
                         @endif
+
                         <div class="md:col-span-2">
                             <label class="block text-xs font-medium text-slate-600 mb-1.5">Titre de l'événement</label>
                             <input type="text" name="title" placeholder="Ex : Soirée d'intégration BDE"
@@ -244,6 +240,7 @@
                                     class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-slate-200 bg-white text-sm font-normal text-slate-600 outline-none transition-all duration-200 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500">
                             </div>
                         </div>
+
                         <div>
                             <label class="block text-xs font-medium text-slate-600 mb-1.5">Lieu</label>
                             <div class="relative">
@@ -261,6 +258,7 @@
                                     class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-slate-200 bg-white text-sm font-normal placeholder:text-slate-400 placeholder:font-light outline-none transition-all duration-200 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500">
                             </div>
                         </div>
+
                         <div class="md:col-span-2 flex items-center justify-end gap-3 pt-2">
                             <button type="button" class="px-5 py-2.5 rounded-lg border border-slate-200 text-sm font-medium text-slate-600 hover:bg-slate-50 transition-all duration-200">
                                 Annuler
@@ -273,7 +271,7 @@
                 </div>
 
                 <!-- CAPACITY TRACKING TABLE -->
-                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden mb-6">
+                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
                     <div class="flex items-center justify-between px-6 lg:px-8 py-5 border-b border-slate-100">
                         <div>
                             <h2 class="text-base font-semibold text-slate-900 tracking-tight">Suivi des capacités</h2>
@@ -312,7 +310,7 @@
                                         $maxCapacity = (int) ($item->max_capacity ?? 0);
                                         $percentage = $maxCapacity > 0 ? min(100, round(($registeredCount / $maxCapacity) * 100)) : 0;
                                         @endphp
-                                        <div class="flex items-center gap-3">
+                                        <div class="flex items-center gap-3 mb-4">
                                             <div class="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
                                                 <div class="h-full bg-indigo-600 rounded-full transition-all duration-500"
                                                     style="width: {{ $percentage . '%'}}"></div>

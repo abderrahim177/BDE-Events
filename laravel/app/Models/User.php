@@ -12,7 +12,6 @@ class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
-    
     /**
      * The attributes that are mass assignable.
      *
@@ -24,7 +23,6 @@ class User extends Authenticatable
         'password',
         'role',
     ];
-
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -34,7 +32,6 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-
     /**
      * Get the attributes that should be cast.
      *
@@ -51,19 +48,18 @@ class User extends Authenticatable
     {
         return $this->hasMany(Reservation::class);
     }
-
     public function isAdmin(): bool
     {
         return $this->role === 'admin';
     }
     public function createdEvents()
-{
+    {
     return $this->hasMany(Event::class, 'user_id');
-}
+    }
 // njibo a7dat li hjaz fiha had talib
-public function reservedEvents(){
-    return $this->belongsToMany(Event::class, 'reservations')
+    public function reservedEvents(){
+        return $this->belongsToMany(Event::class, 'reservations')
                 ->withPivot('status', 'ticket_reference')
                 ->withTimestamps();
-}
+    }
 }

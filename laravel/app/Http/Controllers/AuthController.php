@@ -5,10 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AuthRequest;
 use App\Http\Requests\loginRequest;
 use App\Models\User;
-use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
-class AuthController extends Controller
-{
+class AuthController extends Controller{
 
     public function showRegister(){
         return view('auth.connexion');
@@ -17,25 +15,27 @@ class AuthController extends Controller
     public function showLogin(){
         return view('auth.connexion');
     }
-
-    public function Register(AuthRequest $request)
-    {
-         $request->validated();
-        $user =User::create([
-            'name' => $request->name, 
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'role' => 'student',
-        ]);
-        Auth::login($user);
-        
-        return redirect()->route('students.dashboard')->with('success', 'Bienvenue sur BDE-Events !');
-    }
-
-     public function Login(loginRequest $request)
+   public function Register(AuthRequest $request)
 {
-    $credentials = $request->validated();
-    if (Auth::attempt($credentials)) {
+    $inputsValidated = $request->validated();
+
+    $user = User::create([
+        'name'     => $inputsValidated['name'], 
+        'email'    => $inputsValidated['email'],
+        'password' => bcrypt($inputsValidated['password']), 
+        'role'     => 'student',
+    ]);
+
+    Auth::login($user);
+
+    return redirect()->route('students.dashboard')->with('success', 'Bienvenue sur BDE-Events !');
+}
+
+     public function Login(loginRequest $request){
+
+        $credentials = $request->validated();
+
+        if (Auth::attempt($credentials)) {
         $request->session()->regenerate();
         if (Auth::user()->role === 'admin') {
             return redirect()->route('admin.dashboard');
@@ -45,8 +45,7 @@ class AuthController extends Controller
     return back()->withErrors([
         'email' => 'Vos identifiants sont incorrects !',
     ]);
-}
-
+    }
     public function logout()
     {
         Auth::logout();

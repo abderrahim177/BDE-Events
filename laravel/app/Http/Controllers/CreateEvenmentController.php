@@ -25,7 +25,6 @@ class CreateEvenmentController extends Controller
         $reservation->update([
             'status' => $request->status
         ]);
-
         return redirect()->back()->with('success', 'Statut de la réservation mis à jour avec succès!');
     }
     public function Create(CreateRequest $request)
@@ -33,7 +32,7 @@ class CreateEvenmentController extends Controller
     $validated = $request->validated();
     try {
         Event::create([
-            'user_id' => Auth::id(),
+            'user_id' =>   Auth::id(),
             'title'        => $validated['title'],
             'description'  => $validated['description'],
             'date_time'    => $validated['datetime'], 

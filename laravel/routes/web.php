@@ -18,6 +18,7 @@ Route::middleware('guest')->group(function () {
 
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AuthController::class, 'Login'])->name('login.submit');
+    Route::get('/' , [GetAllevenmentController::class , 'getEventsNotReserved']);
 });
 
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
@@ -34,3 +35,5 @@ Route::middleware(['auth', RoleMiddleware::class . ':admin'])->group(function ()
     Route::get('/reservations', [CreateEvenmentController::class, 'index'])->name('admin.reservations.index');
     Route::patch('/reservations/{id}/status', [CreateEvenmentController::class, 'updateStatus'])->name('admin.reservations.updateStatus');
 });
+
+Route::get('/' , [GetAllevenmentController::class , 'getEventsNotReserved']);

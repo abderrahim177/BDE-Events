@@ -194,10 +194,13 @@
                                     <span class="text-indigo-600 font-semibold">{{ $registeredCount }}</span> / {{ $event->max_capacity }} places
                                 </span>
                             </div>
-
+                            @if($event->isFull())
+                            <span class="badge bg-red">Événement Complet</span>
+                            @else
                             <a href="{{ route('reservation', $event->id) }}" class="w-full py-2.5 rounded-lg bg-indigo-600 text-white text-xs font-medium hover:bg-indigo-700 transition-all duration-200 shadow-sm hover:shadow-md flex items-center justify-center gap-2">
                                 <i class="fa-solid fa-bolt text-[10px]"></i> S'inscrire en 1 clic
                             </a>
+                            @endif
                         </div>
                     </div>
                     @endforeach

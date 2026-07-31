@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Event extends Model
 {
-    protected $fillable = ['user_id','title', 'description', 'date_time', 'location', 'price', 'max_capacity'];
+    protected $fillable = ['user_id', 'title', 'description', 'date_time', 'location', 'price', 'max_capacity'];
 
     // les reservation li tdaro lhad l7adat
     public function reservations(): HasMany
@@ -26,15 +26,16 @@ class Event extends Model
     {
         return $this->remainingPlaces() <= 0;
     }
+
     public function organizer()
-{
-    return $this->belongsTo(User::class, 'user_id');
-}
-// njibo ga3 li hajzo fhad l7adat 
-public function attendees()
-{
-    return $this->belongsToMany(User::class, 'reservations')
-                ->withPivot('status', 'ticket_reference')
-                ->withTimestamps();
-}
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+    // njibo ga3 li hajzo fhad l7adat 
+    public function attendees()
+    {
+        return $this->belongsToMany(User::class, 'reservations')
+            ->withPivot('status', 'ticket_reference')
+            ->withTimestamps();
+    }
 }

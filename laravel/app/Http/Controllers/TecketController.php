@@ -7,8 +7,7 @@ use Illuminate\Container\Attributes\Auth as AttributesAuth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
-class TecketController extends Controller
-{
+class TecketController extends Controller{
     public function store(){
         $reservations = Reservation::with(['event', 'user'])
             ->where('user_id', Auth::id())
@@ -16,8 +15,8 @@ class TecketController extends Controller
             ->get();
         return view('clients.ticket', compact('reservations'));               
     }
-//     public function download($id)
-// {
+//     public function download($id){
+
 //     $reservation = Reservation::with(['event', 'user'])
 //         ->where('id', $id)
 //         ->where('user_id', Auth::id())
