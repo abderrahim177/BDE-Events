@@ -1,12 +1,7 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Models\Reservation;
-use Illuminate\Container\Attributes\Auth as AttributesAuth;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Barryvdh\DomPDF\Facade\Pdf;
 class TecketController extends Controller{
     public function store(){
         $reservations = Reservation::with(['event', 'user'])
@@ -31,3 +26,7 @@ class TecketController extends Controller{
 //     return $pdf->download('Ticket-' . $reservation->ticket_reference . '.pdf');
 // }
 }
+
+
+
+
