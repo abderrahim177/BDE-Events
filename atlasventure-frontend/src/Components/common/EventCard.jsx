@@ -2,49 +2,50 @@ import React from 'react';
 import { Calendar, MapPin, Zap, Lock } from 'lucide-react';
 
 export default function EventCard({ event, onReserve }) {
-  const isFull = event.reserved_count >= event.max_people;
-  const percentage = Math.min((event.reserved_count / event.max_people) * 100, 100);
+  const isFull = event.reserved_count >= event.max_capacity;
+  const percentage = Math.min((event.reserved_count / event.max_capacity) * 100, 100);
+
   return (
-    <div className="bg-white rounded-2xl border border-slate-200/80 overflow-hidden hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-300 flex flex-col justify-between group">
-      <div>
-        {/* Event Banner */}
-        <div className="relative h-44 bg-gradient-to-br from-indigo-600 to-indigo-900 p-4 flex flex-col justify-between overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent"></div>
+    <div className="bg-white rounded-3xl p-4 border border-slate-100 shadow-[6px_6px_16px_rgba(0,0,0,0.04),_-6px_-6px_16px_rgba(255,255,255,0.8),inset_1px_1px_2px_rgba(255,255,255,0.9)] hover:shadow-[10px_10px_24px_rgba(0,0,0,0.06),_-10px_-10px_24px_rgba(255,255,255,0.9)] transition-all duration-300 flex flex-col justify-between group font-sans">
+      <div className="space-y-3.5">
+        
+        {/* Banner with Muted Dark Gradient & Clay Badge */}
+        <div className="relative h-36 rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 p-3.5 flex flex-col justify-between overflow-hidden shadow-[inset_2px_2px_6px_rgba(255,255,255,0.1)]">
           
-          <span className="self-start px-3 py-1 rounded-full text-xs font-semibold bg-white/90 backdrop-blur-md text-emerald-600 shadow-sm">
+          <span className="self-start px-2.5 py-0.5 rounded-lg text-[10px] font-semibold bg-white/90 backdrop-blur-md text-slate-900 shadow-[1px_1px_4px_rgba(0,0,0,0.1)]">
             {event.is_free ? 'Gratuit' : `${event.price} DH`}
           </span>
 
           <div className="relative z-10">
-            <h3 className="text-xl font-bold text-white tracking-tight leading-snug group-hover:text-indigo-100 transition">
+            <h3 className="text-sm font-semibold text-white tracking-tight leading-snug line-clamp-2">
               {event.title}
             </h3>
           </div>
         </div>
 
         {/* Details Section */}
-        <div className="p-5 space-y-4">
-          <div className="space-y-2 text-xs font-medium text-slate-600">
-            <div className="flex items-center gap-2.5">
-              <Calendar className="w-4 h-4 text-indigo-600" />
+        <div className="space-y-3 px-1">
+          <div className="space-y-1.5 text-[11px] font-medium text-slate-500">
+            <div className="flex items-center gap-2">
+              <Calendar className="w-3.5 h-3.5 text-amber-500" />
               <span>{event.datetime}</span>
             </div>
-            <div className="flex items-center gap-2.5">
-              <MapPin className="w-4 h-4 text-indigo-600" />
-              <span>{event.lieu}</span>
+            <div className="flex items-center gap-2">
+              <MapPin className="w-3.5 h-3.5 text-amber-500" />
+              <span className="truncate">{event.lieu}</span>
             </div>
           </div>
 
-          {/* Progress Bar */}
-          <div className="space-y-1.5 pt-2">
-            <div className="flex justify-between items-center text-xs font-semibold">
-              <span className="text-slate-500">Places réservées</span>
-              <span className="text-slate-800">{event.reserved_count} / {event.max_people}</span>
+          {/* Clay Progress Bar */}
+          <div className="space-y-1 pt-1">
+            <div className="flex justify-between items-center text-[10px] font-semibold">
+              <span className="text-slate-400">Places réservées</span>
+              <span className="text-slate-700">{event.reserved_count} / {event.max_capacity}</span>
             </div>
-            <div className="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
+            <div className="w-full h-2 rounded-full bg-slate-100 p-0.5 shadow-[inset_1px_1px_2px_rgba(0,0,0,0.1)]">
               <div
                 className={`h-full rounded-full transition-all duration-500 ${
-                  isFull ? 'bg-red-500' : 'bg-indigo-600'
+                  isFull ? 'bg-rose-500' : 'bg-amber-500'
                 }`}
                 style={{ width: `${percentage}%` }}
               ></div>
@@ -54,20 +55,20 @@ export default function EventCard({ event, onReserve }) {
       </div>
 
       {/* Button */}
-      <div className="px-5 pb-5 pt-0">
+      <div className="pt-4">
         {isFull ? (
           <button
             disabled
-            className="w-full py-2.5 rounded-xl bg-slate-100 text-slate-400 font-semibold text-xs flex items-center justify-center gap-2 cursor-not-allowed"
+            className="w-full py-2 rounded-xl bg-slate-100 text-slate-400 font-medium text-[11px] flex items-center justify-center gap-1.5 cursor-not-allowed border border-slate-200/50"
           >
-            <Lock className="w-3.5 h-3.5" /> Événement Complet
+            <Lock className="w-3 h-3" /> Événement Complet
           </button>
         ) : (
           <button
             onClick={() => onReserve(event.id)}
-            className="w-full py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 active:scale-[0.99] text-white font-semibold text-xs flex items-center justify-center gap-2 shadow-md shadow-indigo-600/20 transition"
+            className="w-full py-2 rounded-xl bg-amber-500 hover:bg-amber-400 active:scale-[0.98] text-slate-950 font-semibold text-[11px] flex items-center justify-center gap-1.5 shadow-[inset_-2px_-2px_4px_rgba(0,0,0,0.15),_0_4px_12px_rgba(245,158,11,0.3)] transition-all duration-200"
           >
-            <Zap className="w-3.5 h-3.5 fill-white" /> S'inscrire en 1 clic
+            <Zap className="w-3.5 h-3.5 fill-slate-950" /> S'inscrire en 1 clic
           </button>
         )}
       </div>
