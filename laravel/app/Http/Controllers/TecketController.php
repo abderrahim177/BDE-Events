@@ -8,7 +8,7 @@ class TecketController extends Controller{
             ->where('user_id', Auth::id())
             ->latest() 
             ->get();
-        return view('clients.ticket', compact('reservations'));               
+        return response()->json($reservations ,200);               
     }
 //     public function download($id){
 

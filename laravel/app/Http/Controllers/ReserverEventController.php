@@ -13,19 +13,31 @@ class ReserverEventController extends Controller{
                                           ->where('event_id', $event->id)
                                           ->first();
         if ($existingReservation) {
-            return redirect()->back()->with('error', 'Vous êtes déjà inscrit à cet événement !');
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Vous êtes déjà inscrit à cet événement !'
+            ], 400);
         }
         if ($event->reservations()->count() >= $event->max_capacity) {
-            return redirect()->back()->with('error', 'Désolé, cet événement est complet !');
+            return response()->json([
+                'status' => 'error',
+                'message' =>  'Désolé, cet événement est complet !'
+            ], 400);
         }
         $ticketRef = 'BDE-'. now()->format('Y') . '-' . Str::upper(Str::random(8));
-        Reservation::create([
+        $reservation = Reservation::create([
             'user_id'          => Auth::id(),
             'event_id'         => $event->id,
             'ticket_reference' => $ticketRef,
         ]);
-        return redirect()->back()->with('success', 'Réservation effectuée avec succès ! Code: ' . $ticketRef);
-    }
+        return response()->json([
+            'status'  => 'success',
+            'message' => 'Réservation effectuée avec succès !',
+            'data'    => [
+                'ticket_reference' => $ticketRef,
+                'reservation'      => $reservation
+            ]
+        ], 201);    }
 }
 
 
