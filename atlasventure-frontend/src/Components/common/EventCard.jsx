@@ -28,11 +28,11 @@ export default function EventCard({ event, onReserve }) {
           <div className="space-y-1.5 text-[11px] font-medium text-slate-500">
             <div className="flex items-center gap-2">
               <Calendar className="w-3.5 h-3.5 text-amber-500" />
-              <span>{event.datetime}</span>
+              <span>{event.date_time}</span>
             </div>
             <div className="flex items-center gap-2">
               <MapPin className="w-3.5 h-3.5 text-amber-500" />
-              <span className="truncate">{event.lieu}</span>
+              <span className="truncate">{event.location}</span>
             </div>
           </div>
 
