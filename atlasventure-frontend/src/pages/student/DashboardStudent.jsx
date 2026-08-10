@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "../../Components/common/Sidebar";
 import Header from "../../Components/common/Navbar";
 import EventCard from "../../Components/common/EventCard";
-import Mytickets from "./MyTickets"; // 1. استدعاء المكون هنا
+import Mytickets from "./MyTickets"; 
 import axios from "axios";
 
 export default function StudentDashboard() {
-  const [activeTab, setActiveTab] = useState("discover"); // التحكم بالحالة هنا
+  const [activeTab, setActiveTab] = useState("discover"); 
   const [searchQuery, setSearchQuery] = useState("");
   const [filter, setFilter] = useState("Tous");
   
@@ -131,10 +131,8 @@ export default function StudentDashboard() {
               )}
             </div>
           )}
-
           {/* عرض مكون التذاكر عند الضغط على Mes Billets */}
           {activeTab === "my-tickets" && <Mytickets />}
-
           {/* تبويبات أخرى مستقبلاً */}
           {activeTab === "saved" && (
             <div className="p-8 text-center text-xs text-slate-400">Événements enregistrés (Bientôt)</div>

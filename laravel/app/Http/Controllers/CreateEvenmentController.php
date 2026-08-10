@@ -9,12 +9,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 class CreateEvenmentController extends Controller
 {
-    public function index()
-    {
-        $reservations = Reservation::with(['user', 'event'])
-            ->latest()
-            ->paginate(10); 
-        return response()->json($reservations , 200);
+    public function index(){
+        $evenment = Event::withCount('reservations')->latest()->get();
+        return response()->json($evenment , 200);
     }
     // public function updateStatus(Request $request, $id)
     // {

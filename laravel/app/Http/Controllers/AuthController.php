@@ -18,7 +18,6 @@ class AuthController extends Controller
     {
         $inputsValidated = $request->validated();
 
-        // 1. إنشاء المستخدم مع التشفير الآمن لكلمة السر
         $user = User::create([
             'name'     => $inputsValidated['name'],
             'email'    => $inputsValidated['email'],
@@ -26,10 +25,8 @@ class AuthController extends Controller
             'role'     => 'student', 
         ]);
 
-        // 2. إنشاء Token خاص بالجهة المستخدمة (React)
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        // 3. إرجاع الاستجابة مع البيانات والـ Token
         return response()->json([
             'status'  => 'success',
             'message' => 'Compte créé avec succès !',
@@ -50,23 +47,15 @@ class AuthController extends Controller
     {
         $credentials = $request->validated();
 
-        // 1. التحقق من الهوية (Email & Password)
         if (!Auth::attempt($credentials)) {
             return response()->json([
                 'status'  => 'error',
                 'message' => 'Les identifiants sont incorrects !'
-            ], 401); // Unauthorized
+            ], 401); 
         }
-
         $user = User::where('email', $credentials['email'])->firstOrFail();
-
-        // 2. حذف الـ Tokens القديمة لمنع التعدد غير المرغوب فيه (اختياري وحسب الأمان المطلوبة)
         $user->tokens()->delete();
-
-        // 3. إنشاء Token جديد
         $token = $user->createToken('auth_token')->plainTextToken;
-
-        // 4. إرجاع الـ Token مع الدور (Role) لتسهيل الـ Routing فـ React
         return response()->json([
             'status'  => 'success',
             'message' => 'Connexion réussie !',

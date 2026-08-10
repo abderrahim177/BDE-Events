@@ -1,3 +1,5 @@
+
+
 import React from 'react';
 import { Calendar, LogOut, Compass, Ticket, Bookmark, User } from 'lucide-react';
 
@@ -19,7 +21,7 @@ export default function Sidebar({ activeTab, setActiveTab, user }) {
           </div>
           <div>
             <span className="font-bold text-base text-white tracking-tight block">BDE Events</span>
-            <span className="text-[10px] text-slate-400 font-medium tracking-wide">STUDENT PORTAL</span>
+            <span className="text-[10px] text-slate-400 font-medium tracking-wide">BDE</span>
           </div>
         </div>
 

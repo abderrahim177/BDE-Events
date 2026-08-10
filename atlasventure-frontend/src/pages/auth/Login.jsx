@@ -27,26 +27,35 @@ export default function Login() {
     setError(null);
     setLoading(true);
 
+    localStorage.clear();
+
     try {
-      // 1. إرسال الطلب للـ Backend (Laravel Sanctum)
       const response = await axios.post('http://localhost:8000/api/login', {
         email: formData.email,
         password: formData.password,
       });
 
-      // 2. حفظ الـ Token فـ localStorage
-      if (response.data.token) {
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('user', JSON.stringify(response.data.user));
-        
-        // 3. التوجيه للـ Dashboard
-        navigate('/student');
+      const { token, user } = response.data;
+    
+      if (token && user) {
+        const userRole = user.role?.toLowerCase()?.trim();
+
+        localStorage.setItem('token', token);
+        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('user_role', userRole); 
+
+        if (userRole === 'admin' || userRole === 'bde') {
+          navigate('/admin/dashboard', { replace: true }); 
+        } else if (userRole === 'student') {
+          navigate('/student/dashboard', { replace: true });
+        } else {
+          setError("Rôle utilisateur non reconnu.");
+        }
+      } else {
+        setError('Réponse du serveur invalide.');
       }
     } catch (err) {
-      console.error('Login Error:', err);
-      setError(
-        err.response?.data?.message || 'Email ou mot de passe incorrect.'
-      );
+      setError(err.response?.data?.message || 'Email ou mot de passe incorrect.');
     } finally {
       setLoading(false);
     }
@@ -155,7 +164,7 @@ export default function Login() {
 
           {/* Login Form */}
           <div>
-            <h2 class="text-2xl font-semibold text-slate-900 tracking-tight mb-1">
+            <h2 className="text-2xl font-semibold text-slate-900 tracking-tight mb-1">
               Bon retour parmi nous
             </h2>
             <p className="text-slate-500 font-light text-sm mb-8">
