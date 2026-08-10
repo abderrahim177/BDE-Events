@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Trash2, Calendar, MapPin } from "lucide-react";
-import NavbarBDE from '../../Components/CommonBDE/NavbarBDE';
-import SidebarBDE from '../../Components/CommonBDE/SidebarBDE';
+import NavbarBDE from "../../Components/CommonBDE/NavbarBDE";
+import SidebarBDE from "../../Components/CommonBDE/SidebarBDE";
 
 export default function ManageEvents() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadingId, setLoadingId] = useState(null); // معرفة أي عنصر يتنفذ عليه الحذف
   const [errorMsg, setErrorMsg] = useState("");
 
+  // جلب الأحداث
   const fetchEvents = async () => {
     try {
       setLoading(true);
@@ -35,17 +37,30 @@ export default function ManageEvents() {
     }
   };
 
+  // 🔴 دالة الحذف المصححة
   const handleDelete = async (id) => {
-    if (window.confirm("Voulez-vous vraiment supprimer cet événement ?")) {
-      try {
-        const token = localStorage.getItem("token");
-        await axios.delete(`http://127.0.0.1:8000/api/eventManage/${id}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        fetchEvents();
-      } catch (err) {
-        console.error("Erreur de suppression:", err);
-      }
+    if (!window.confirm("Voulez-vous vraiment supprimer cet événement ?")) {
+      return;
+    }
+
+    setLoadingId(id);
+
+    try {
+      const token = localStorage.getItem("token");
+      await axios.delete(`http://127.0.0.1:8000/api/eventManage/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json",
+        },
+      });
+      setEvents((prevEvents) => prevEvents.filter((event) => event.id !== id));
+    } catch (err) {
+      console.error("Erreur de suppression:", err.response?.data || err.message);
+      alert(
+        err.response?.data?.message || "Impossible de supprimer cet événement."
+      );
+    } finally {
+      setLoadingId(null);
     }
   };
 
@@ -197,10 +212,15 @@ export default function ManageEvents() {
                           <td className="p-4 text-right whitespace-nowrap w-20">
                             <button
                               onClick={() => handleDelete(item.id)}
-                              className="p-2 rounded-xl text-rose-500 hover:bg-rose-50 transition-all inline-flex items-center justify-center"
+                              disabled={loadingId === item.id}
+                              className="p-2 rounded-xl text-rose-500 hover:bg-rose-50 transition-all inline-flex items-center justify-center disabled:opacity-50"
                               title="Supprimer l'événement"
                             >
-                              <Trash2 className="w-4 h-4" />
+                              {loadingId === item.id ? (
+                                <div className="w-4 h-4 border-2 border-rose-500 border-t-transparent rounded-full animate-spin"></div>
+                              ) : (
+                                <Trash2 className="w-4 h-4" />
+                              )}
                             </button>
                           </td>
                         </tr>

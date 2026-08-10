@@ -55,22 +55,18 @@ export default function Sidebar({ activeTab, setActiveTab, user }) {
       </div>
 
       {/* User Card Footer */}
-      <div className="p-2.5 bg-slate-800/40 rounded-2xl border border-slate-800/80 flex items-center justify-between shadow-[inset_1px_1px_2px_rgba(255,255,255,0.05)]">
-        <div className="flex items-center gap-2.5 overflow-hidden">
-          <img
-            src={user?.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100"}
-            alt="Avatar"
-            className="w-8 h-8 rounded-xl object-cover ring-2 ring-slate-700"
-          />
-          <div className="truncate">
-            <h4 className="text-[11px] font-medium text-white truncate">{user?.name || "Abdorrahim"}</h4>
-            <p className="text-[9px] text-slate-400 capitalize">{user?.role || "Student"}</p>
-          </div>
-        </div>
-        <button className="p-1.5 text-slate-400 hover:text-rose-400 hover:bg-slate-800 rounded-lg transition duration-200">
-          <LogOut className="w-3.5 h-3.5" />
-        </button>
-      </div>
+      <div className="pt-4 border-t border-slate-800">
+              <button
+                onClick={() => {
+                  localStorage.removeItem("token");
+                  window.location.href = "/login";
+                }}
+                className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-xs font-semibold text-rose-400 hover:bg-rose-500/10 hover:text-rose-300 transition-all"
+              >
+                <LogOut className="w-4 h-4" />
+                <span>Déconnexion</span>
+              </button>
+            </div>
     </aside>
   );
 }

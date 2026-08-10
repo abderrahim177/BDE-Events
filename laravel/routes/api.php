@@ -35,6 +35,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/admin/create', [CreateEvenmentController::class, 'Create']);
         Route::get('/eventManage', [CreateEvenmentController::class, 'index']);
         Route::get('/stats', [GetAllevenmentController::class, 'TotaleEvenment']);
+        Route::delete('/eventManage/{id}' , [CreateEvenmentController::class , 'destroy']);
     });
 
 });

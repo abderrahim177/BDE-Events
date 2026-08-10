@@ -50,4 +50,18 @@ class CreateEvenmentController extends Controller
             ], 500);
     }
 }
+
+public function destroy($id){
+    $Event = Event::findOrfail($id);
+    if(!$Event){
+        return response()->json([
+            "message" => "Evenment Introvable",
+        ], 404);
+    }
+    $Event->delete();
+
+    return response()->json([
+        "message" => "event removed with success !",
+    ], 200);
+}
 }

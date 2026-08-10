@@ -18,6 +18,5 @@ export default function RoleBasedLayout({ requiredRole }) {
   if (!isPathAllowed) {
     return <Navigate to="/unauthorized" replace />;
   }
-
   return <Outlet />;
 }
