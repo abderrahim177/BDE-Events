@@ -73,7 +73,6 @@ export default function ManageEvents() {
       console.error("Erreur API:", err);
       setErrorMsg("Impossible de charger les événements.");
     } finally {
-      // إيقاف Skeleton بعد التحميل
       setLoading(false);
     }
   };
@@ -82,9 +81,7 @@ export default function ManageEvents() {
     if (!window.confirm("Voulez-vous vraiment supprimer cet événement ?")) {
       return;
     }
-
     setLoadingId(id);
-
     try {
       const token = localStorage.getItem("token");
       await axios.delete(`http://127.0.0.1:8000/api/eventManage/${id}`, {

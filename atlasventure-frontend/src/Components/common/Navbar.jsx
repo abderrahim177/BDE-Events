@@ -1,7 +1,31 @@
 import React from 'react';
 import { Search, Bell, ChevronDown } from 'lucide-react';
 
-export default function Navbar({ user, searchQuery, setSearchQuery }) {
+export default function Navbar({ user, searchQuery, setSearchQuery, loading = false }) {
+  if (loading) {
+    return (
+      <header className="w-full flex justify-between items-center px-8 py-3.5 bg-[#f8fafc] border-b border-slate-200/60 font-sans animate-pulse">
+        {/* Search Box Skeleton */}
+        <div className="w-72 h-8 bg-slate-200 rounded-xl"></div>
+
+        {/* Right Actions Skeleton */}
+        <div className="flex items-center gap-3">
+          {/* Bell Skeleton */}
+          <div className="w-8 h-8 rounded-xl bg-slate-200"></div>
+
+          {/* User Profile Skeleton */}
+          <div className="flex items-center gap-2.5 px-3 py-1 bg-slate-200 rounded-xl w-36 h-9">
+            <div className="w-7 h-7 rounded-lg bg-slate-300"></div>
+            <div className="flex-1 space-y-1">
+              <div className="h-2.5 bg-slate-300 rounded w-16"></div>
+              <div className="h-2 bg-slate-300 rounded w-10"></div>
+            </div>
+          </div>
+        </div>
+      </header>
+    );
+  }
+
   return (
     <header className="w-full flex justify-between items-center px-8 py-3.5 bg-[#f8fafc] border-b border-slate-200/60 font-sans">
       {/* Search Input Box with Claymorphism Inset */}

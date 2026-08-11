@@ -1,15 +1,46 @@
-
-
 import React from 'react';
 import { Calendar, LogOut, Compass, Ticket, Bookmark, User } from 'lucide-react';
 
-export default function Sidebar({ activeTab, setActiveTab, user }) {
+export default function Sidebar({ activeTab, setActiveTab, user, loading = false }) {
   const menuItems = [
     { id: 'discover', label: 'Découvrir', icon: Compass },
     { id: 'my-tickets', label: 'Mes Billets', icon: Ticket },
     { id: 'saved', label: 'Enregistrés', icon: Bookmark },
     { id: 'profile', label: 'Mon Profil', icon: User },
   ];
+
+  if (loading) {
+    return (
+      <aside className="w-64 bg-slate-900 text-slate-300 h-full p-5 flex flex-col justify-between border-r border-slate-800/60 select-none font-sans animate-pulse">
+        <div className="space-y-8">
+          {/* Brand Logo Skeleton */}
+          <div className="flex items-center gap-3 px-2 pt-1">
+            <div className="w-10 h-10 rounded-2xl bg-slate-800"></div>
+            <div className="space-y-1.5">
+              <div className="h-3.5 bg-slate-800 rounded w-24"></div>
+              <div className="h-2.5 bg-slate-800/60 rounded w-10"></div>
+            </div>
+          </div>
+
+          {/* Navigation Menu Skeleton */}
+          <div className="space-y-3">
+            <div className="h-2.5 bg-slate-800 rounded w-20 mx-3"></div>
+
+            <div className="space-y-2">
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} className="w-full h-9 rounded-xl bg-slate-800/60"></div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Footer Logout Button Skeleton */}
+        <div className="pt-4 border-t border-slate-800">
+          <div className="w-full h-9 rounded-2xl bg-slate-800/60"></div>
+        </div>
+      </aside>
+    );
+  }
 
   return (
     <aside className="w-64 bg-slate-900 text-slate-300 h-full p-5 flex flex-col justify-between border-r border-slate-800/60 select-none font-sans">
@@ -56,17 +87,17 @@ export default function Sidebar({ activeTab, setActiveTab, user }) {
 
       {/* User Card Footer */}
       <div className="pt-4 border-t border-slate-800">
-              <button
-                onClick={() => {
-                  localStorage.removeItem("token");
-                  window.location.href = "/login";
-                }}
-                className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-xs font-semibold text-rose-400 hover:bg-rose-500/10 hover:text-rose-300 transition-all"
-              >
-                <LogOut className="w-4 h-4" />
-                <span>Déconnexion</span>
-              </button>
-            </div>
+        <button
+          onClick={() => {
+            localStorage.removeItem("token");
+            window.location.href = "/login";
+          }}
+          className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-xs font-semibold text-rose-400 hover:bg-rose-500/10 hover:text-rose-300 transition-all"
+        >
+          <LogOut className="w-4 h-4" />
+          <span>Déconnexion</span>
+        </button>
+      </div>
     </aside>
   );
 }

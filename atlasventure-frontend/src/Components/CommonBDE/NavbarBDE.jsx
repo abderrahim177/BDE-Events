@@ -2,7 +2,6 @@ import React from "react";
 import { Bell, User } from "lucide-react";
 
 export default function Header({ loading = false }) {
-  // 🟢 Skeleton Component خاص بالـ Navbar
   if (loading) {
     return (
       <header className="h-16 bg-white border-b border-slate-100 px-8 flex items-center justify-between sticky top-0 z-10 font-sans shadow-sm animate-pulse">
