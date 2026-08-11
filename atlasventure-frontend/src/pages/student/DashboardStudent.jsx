@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "../../Components/common/Sidebar";
 import Header from "../../Components/common/Navbar";
 import EventCard from "../../Components/common/EventCard";
-import Mytickets from "./MyTickets"; 
+import Mytickets from "./MyTickets";
+import Profile from "./Profile"; 
 import axios from "axios";
 
 // Card Skeleton Screen 
@@ -216,9 +217,7 @@ export default function StudentDashboard() {
           {activeTab === "saved" && (
             <div className="p-8 text-center text-xs text-slate-400">Événements enregistrés (Bientôt)</div>
           )}
-          {activeTab === "profile" && (
-            <div className="p-8 text-center text-xs text-slate-400">Page Profil (Bientôt)</div>
-          )}
+          {activeTab === "profile" && <Profile loading = {loading} />}
         </main>
       </div>
     </div>
