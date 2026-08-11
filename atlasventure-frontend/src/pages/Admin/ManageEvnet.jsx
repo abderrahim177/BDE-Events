@@ -37,7 +37,6 @@ export default function ManageEvents() {
     }
   };
 
-  // 🔴 دالة الحذف المصححة
   const handleDelete = async (id) => {
     if (!window.confirm("Voulez-vous vraiment supprimer cet événement ?")) {
       return;
