@@ -9,7 +9,7 @@ import DashboardAdmin from "./pages/Admin/DashboardAdmin";
 import CreateEvent from "./pages/Admin/CreatEvent";
 import ManageEvents from "./pages/Admin/ManageEvnet";
 import StudentDashboard from "./pages/student/DashboardStudent";
-import Unauthorized from "./Components/Unauthorized"; // صفحة الخطأ 403
+import Unauthorized from "./Components/Unauthorized"; 
 
 export default function App() {
   return (
@@ -31,6 +31,7 @@ export default function App() {
         {/* 🟢 STUDENT ROUTES */}
         <Route element={<RoleBasedLayout requiredRole="student" />}>
           <Route path="/student/dashboard" element={<StudentDashboard />} />
+
         </Route>
 
         {/* Catch-all for non-existing URLs */}

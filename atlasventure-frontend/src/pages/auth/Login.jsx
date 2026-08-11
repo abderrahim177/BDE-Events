@@ -44,7 +44,7 @@ export default function Login() {
         localStorage.setItem('user', JSON.stringify(user));
         localStorage.setItem('user_role', userRole); 
 
-        if (userRole === 'admin' || userRole === 'bde') {
+        if (userRole === 'admin') {
           navigate('/admin/dashboard', { replace: true }); 
         } else if (userRole === 'student') {
           navigate('/student/dashboard', { replace: true });

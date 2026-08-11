@@ -33,19 +33,27 @@ export default function Register() {
         email: formData.email,
         password: formData.password,
       });
-      if (response.data.token) {
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('user', JSON.stringify(response.data.user));
-        navigate('/student');
+      const { token, user } = response.data;
+    
+      if (token && user) {
+        const userRole = user.role?.toLowerCase()?.trim();
+
+        localStorage.setItem('token', token);
+        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('user_role', userRole); 
+
+        if (userRole === 'admin') {
+          navigate('/admin/dashboard', { replace: true }); 
+        } else if (userRole === 'student') {
+          navigate('/student/dashboard', { replace: true });
+        } else {
+          setError("Rôle utilisateur non reconnu.");
+        }
+      } else {
+        setError('Réponse du serveur invalide.');
       }
     } catch (err) {
-      console.error('Register Error:', err);
-      if (err.response?.data?.errors) {
-        const validationErrors = Object.values(err.response.data.errors).flat();
-        setErrors(validationErrors);
-      } else {
-        setErrors([err.response?.data?.message || 'Une erreur est survenue.']);
-      }
+      setError(err.response?.data?.message || 'Email ou mot de passe incorrect.');
     } finally {
       setLoading(false);
     }
