@@ -15,6 +15,5 @@ export const ROLE_ALLOWED_ROUTES = {
 
 export const DEFAULT_ROLE_REDIRECT = {
   admin: "/admin/dashboard",
-  bde: "/admin/dashboard",
   student: "/student/dashboard",
 };
