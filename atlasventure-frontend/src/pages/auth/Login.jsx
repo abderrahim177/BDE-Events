@@ -14,14 +14,6 @@ export default function Login() {
 
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: type === 'checkbox' ? checked : value,
-    }));
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
@@ -43,7 +35,6 @@ export default function Login() {
         localStorage.setItem('token', token);
         localStorage.setItem('user', JSON.stringify(user));
         localStorage.setItem('user_role', userRole); 
-
         if (userRole === 'admin') {
           navigate('/admin/dashboard', { replace: true }); 
         } else if (userRole === 'student') {
@@ -190,8 +181,9 @@ export default function Login() {
                     type="email"
                     name="email"
                     value={formData.email}
-                    onChange={handleChange}
-                    required
+                    onChange={(e) =>
+                      setFormData((prev) => ({ ...prev, email: e.target.value }))
+                    }
                     placeholder="prenom.nom@campus.fr"
                     className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-slate-200 bg-white text-sm font-normal placeholder:text-slate-400 outline-none transition-all duration-200 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
                   />
@@ -208,8 +200,9 @@ export default function Login() {
                     type={showPassword ? 'text' : 'password'}
                     name="password"
                     value={formData.password}
-                    onChange={handleChange}
-                    required
+                    onChange={(e) =>
+                      setFormData((prev) => ({ ...prev, password: e.target.value }))
+                    }
                     placeholder="••••••••"
                     className="w-full pl-10 pr-10 py-2.5 rounded-lg border border-slate-200 bg-white text-sm font-normal placeholder:text-slate-400 outline-none transition-all duration-200 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
                   />
@@ -228,7 +221,9 @@ export default function Login() {
                     type="checkbox"
                     name="remember"
                     checked={formData.remember}
-                    onChange={handleChange}
+                    onChange={(e) =>
+                      setFormData((prev) => ({ ...prev, remember: e.target.checked }))
+                    }
                     className="w-3.5 h-3.5 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500/30"
                   />
                   <span className="text-xs font-light text-slate-500">

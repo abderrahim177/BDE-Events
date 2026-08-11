@@ -152,9 +152,7 @@ export default function ManageEvents() {
                             <div className="flex items-center gap-1.5">
                               <Calendar className="w-3.5 h-3.5 text-slate-400 shrink-0" />
                               <span>
-                                {item.date_time ||
-                                  item.datetime ||
-                                  item.date ||
+                                {item.date_time ||                
                                   "N/A"}
                               </span>
                             </div>
@@ -164,7 +162,7 @@ export default function ManageEvents() {
                           <td className="p-4 text-slate-600 whitespace-nowrap">
                             <div className="flex items-center gap-1.5">
                               <MapPin className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-                              <span>{item.lieu || "N/A"}</span>
+                              <span>{item.location || "N/A"}</span>
                             </div>
                           </td>
 

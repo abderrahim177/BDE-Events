@@ -85,7 +85,6 @@ export default function CreateEvent() {
                 </label>
                 <input
                   type="text"
-                  required
                   value={formData.title}
                   placeholder="Ex: Soirée d'intégration"
                   className="w-full p-2.5 rounded-xl border border-slate-200 outline-none focus:border-amber-500 transition-all"
@@ -101,7 +100,6 @@ export default function CreateEvent() {
                 </label>
                 <textarea
                   rows="4"
-                  required
                   value={formData.description}
                   placeholder="Saisissez une description détaillée..."
                   className="w-full p-2.5 rounded-xl border border-slate-200 outline-none focus:border-amber-500 transition-all resize-none"
@@ -118,7 +116,6 @@ export default function CreateEvent() {
                   </label>
                   <input
                     type="datetime-local"
-                    required
                     value={formData.datetime}
                     className="w-full p-2.5 rounded-xl border border-slate-200 outline-none focus:border-amber-500 transition-all"
                     onChange={(e) =>
@@ -132,7 +129,6 @@ export default function CreateEvent() {
                   </label>
                   <input
                     type="text"
-                    required
                     value={formData.lieu}
                     placeholder="Ex: Amphithéâtre A"
                     className="w-full p-2.5 rounded-xl border border-slate-200 outline-none focus:border-amber-500 transition-all"

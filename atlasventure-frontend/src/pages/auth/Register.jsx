@@ -12,13 +12,6 @@ export default function Register() {
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: type === 'checkbox' ? checked : value,
-    }));
-  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
@@ -194,7 +187,9 @@ export default function Register() {
                     type="text"
                     name="name"
                     value={formData.name}
-                    onChange={handleChange}
+                    onChange={(e) =>
+                    setFormData((prev) => ({ ...prev, name: e.target.value }))
+                  }
                     required
                     placeholder="Prénom Nom"
                     className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-slate-200 bg-white text-sm font-normal placeholder:text-slate-400 outline-none transition-all duration-200 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
@@ -212,7 +207,9 @@ export default function Register() {
                     type="email"
                     name="email"
                     value={formData.email}
-                    onChange={handleChange}
+                    onChange={(e) =>
+                    setFormData((prev)=> ({ ...prev, email: e.target.value }))
+                  }
                     required
                     placeholder="prenom.nom@campus.fr"
                     className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-slate-200 bg-white text-sm font-normal placeholder:text-slate-400 outline-none transition-all duration-200 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
@@ -230,7 +227,9 @@ export default function Register() {
                     type="password"
                     name="password"
                     value={formData.password}
-                    onChange={handleChange}
+                    onChange={(e) =>
+                    setFormData((prev) => ({ ...prev, password: e.target.value }))
+                  }
                     required
                     placeholder="8 caractères minimum"
                     className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-slate-200 bg-white text-sm font-normal placeholder:text-slate-400 outline-none transition-all duration-200 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
@@ -243,7 +242,9 @@ export default function Register() {
                   type="checkbox"
                   name="terms"
                   checked={formData.terms}
-                  onChange={handleChange}
+                  onChange={(e) =>
+                    setFormData((prev) => ({ ...prev, terms: e.target.value }))
+                  }
                   className="w-3.5 h-3.5 mt-0.5 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500/30"
                 />
                 <span className="text-xs font-light text-slate-500">
