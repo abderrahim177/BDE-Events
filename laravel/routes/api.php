@@ -27,8 +27,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/students', [GetAllevenmentController::class, 'index']);
         Route::get('/ticket', [TecketController::class, 'store']);
         Route::post('/reservation/{id}', [ReserverEventController::class, 'store']);
+        Route::get('/totaleTiket' , [TecketController::class , "CountTiket"]);
     });
-
     // Admin Only Routes
     Route::middleware(RoleMiddleware::class . ':admin')->group(function () {
         Route::get('/admin', [GetAllevenmentController::class, 'DetailEvent']);

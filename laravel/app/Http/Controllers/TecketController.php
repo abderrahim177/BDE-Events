@@ -10,6 +10,12 @@ class TecketController extends Controller{
             ->get();
         return response()->json($reservations ,200);               
     }
+    public function CountTiket(){
+    $count = Reservation::where('user_id' , Auth::id())->count();
+    return response()->json([
+        'totaleTiket' => $count
+    ], 200);
+}
 //     public function download($id){
 
 //     $reservation = Reservation::with(['event', 'user'])

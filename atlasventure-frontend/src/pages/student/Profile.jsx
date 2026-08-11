@@ -1,19 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { User, Mail, Phone, Lock, Save, Shield, CheckCircle2, Ticket } from "lucide-react";
+import axios from "axios";
 
 // Sub-component for Profile Skeleton Screen
 const ProfileSkeleton = () => (
   <div className="p-6 md:p-8 max-w-5xl mx-auto space-y-6 font-sans animate-pulse">
-    {/* Title Skeleton */}
     <div className="pb-2 border-b border-slate-200/60 space-y-2">
       <div className="h-6 bg-slate-200 rounded-lg w-40"></div>
       <div className="h-3 bg-slate-200 rounded-md w-72"></div>
     </div>
-
-    {/* Overview Header Card Skeleton */}
     <div className="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm flex flex-col md:flex-row items-center gap-6">
       <div className="w-20 h-20 rounded-2xl bg-slate-200 flex-shrink-0"></div>
-
       <div className="flex-1 text-center md:text-left space-y-2.5 w-full">
         <div className="h-5 bg-slate-200 rounded-md w-48 mx-auto md:mx-0"></div>
         <div className="h-3.5 bg-slate-200 rounded-md w-36 mx-auto md:mx-0"></div>
@@ -22,8 +19,6 @@ const ProfileSkeleton = () => (
           <div className="h-5 bg-slate-200 rounded-full w-28"></div>
         </div>
       </div>
-
-      {/* Quick Stats Skeleton */}
       <div className="flex items-center gap-4 pt-4 md:pt-0 border-t md:border-t-0 md:border-l border-slate-100 md:pl-6 w-full md:w-auto justify-around md:justify-start">
         <div className="space-y-1.5 flex flex-col items-center">
           <div className="h-6 bg-slate-200 rounded-md w-8"></div>
@@ -31,59 +26,12 @@ const ProfileSkeleton = () => (
         </div>
       </div>
     </div>
-
-    {/* Forms Skeleton Grid */}
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      {/* Personal Info Form Skeleton */}
-      <div className="md:col-span-2 bg-white rounded-3xl p-6 border border-slate-100 shadow-sm space-y-5">
-        <div className="h-4 bg-slate-200 rounded-md w-48 pb-3 border-b border-slate-100"></div>
-
-        <div className="space-y-4 pt-2">
-          <div className="space-y-2">
-            <div className="h-3 bg-slate-200 rounded w-24"></div>
-            <div className="h-9 bg-slate-200 rounded-xl w-full"></div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <div className="h-3 bg-slate-200 rounded w-24"></div>
-              <div className="h-9 bg-slate-200 rounded-xl w-full"></div>
-            </div>
-            <div className="space-y-2">
-              <div className="h-3 bg-slate-200 rounded w-24"></div>
-              <div className="h-9 bg-slate-200 rounded-xl w-full"></div>
-            </div>
-          </div>
-
-          <div className="pt-2 flex justify-end">
-            <div className="h-9 bg-slate-200 rounded-xl w-48"></div>
-          </div>
-        </div>
-      </div>
-
-      {/* Security Form Skeleton */}
-      <div className="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm space-y-5 h-fit">
-        <div className="h-4 bg-slate-200 rounded-md w-28 pb-3 border-b border-slate-100"></div>
-
-        <div className="space-y-3.5 pt-2">
-          <div className="space-y-2">
-            <div className="h-3 bg-slate-200 rounded w-32"></div>
-            <div className="h-9 bg-slate-200 rounded-xl w-full"></div>
-          </div>
-
-          <div className="space-y-2">
-            <div className="h-3 bg-slate-200 rounded w-36"></div>
-            <div className="h-9 bg-slate-200 rounded-xl w-full"></div>
-          </div>
-
-          <div className="h-9 bg-slate-200 rounded-xl w-full mt-2"></div>
-        </div>
-      </div>
-    </div>
   </div>
 );
 
 export default function Profile({ loading = false }) {
+  const [totalTickets, setTotalTickets] = useState(0);
+
   const getStoredUser = () => {
     try {
       const stored = localStorage.getItem("user");
@@ -92,17 +40,43 @@ export default function Profile({ loading = false }) {
       return {};
     }
   };
+
   const storedUser = getStoredUser();
+
   const [formData, setFormData] = useState({
-    name: storedUser.name || "Abdorrahim",
-    email: storedUser.email || "abdorrahim@example.com",
-    phone: storedUser.phone || "+212 600-000000",
+    name: storedUser?.name || "Abdorrahim",
+    email: storedUser?.email || "abdorrahim@example.com",
+    phone: storedUser?.phone || "+212 600-000000",
     currentPassword: "",
     newPassword: "",
     confirmPassword: "",
   });
 
   const [isSaved, setIsSaved] = useState(false);
+
+  useEffect(() => {
+    const fetchApi = async () => {
+  try {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    const response = await axios.get("http://127.0.0.1:8000/api/totaleTiket", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+      },
+    });
+
+    const count = response.data.length || 0; 
+    
+    setTotalTickets(count);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+    fetchApi();
+  }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -112,19 +86,17 @@ export default function Profile({ loading = false }) {
     e.preventDefault();
     const updatedUser = { ...storedUser, name: formData.name, email: formData.email };
     localStorage.setItem("user", JSON.stringify(updatedUser));
-    
+
     setIsSaved(true);
     setTimeout(() => setIsSaved(false), 3000);
   };
 
-  // Render Skeleton when loading is true
   if (loading) {
     return <ProfileSkeleton />;
   }
 
   return (
     <div className="p-6 md:p-8 max-w-5xl mx-auto space-y-6 font-sans">
-      {/* Header Title */}
       <div className="pb-2 border-b border-slate-200/60">
         <h1 className="text-lg font-bold text-slate-900 tracking-tight">Mon Profil</h1>
         <p className="text-[11px] text-slate-400 font-normal">
@@ -132,7 +104,6 @@ export default function Profile({ loading = false }) {
         </p>
       </div>
 
-      {/* Profile Overview Card */}
       <div className="bg-white rounded-3xl p-6 border border-slate-100 shadow-[2px_4px_16px_rgba(0,0,0,0.03)] flex flex-col md:flex-row items-center gap-6">
         <div className="relative">
           <img
@@ -155,10 +126,9 @@ export default function Profile({ loading = false }) {
           </div>
         </div>
 
-        {/* Quick Stats */}
         <div className="flex items-center gap-4 pt-4 md:pt-0 border-t md:border-t-0 md:border-l border-slate-100 md:pl-6 w-full md:w-auto justify-around md:justify-start">
           <div className="text-center">
-            <span className="text-lg font-bold text-slate-800 block">04</span>
+            <span className="text-lg font-bold text-slate-800 block">{totalTickets}</span>
             <span className="text-[10px] text-slate-400 flex items-center gap-1 justify-center">
               <Ticket className="w-3 h-3 text-slate-400" /> Billets
             </span>
@@ -166,16 +136,13 @@ export default function Profile({ loading = false }) {
         </div>
       </div>
 
-      {/* Success Notification */}
       {isSaved && (
         <div className="p-3 rounded-2xl bg-emerald-50 border border-emerald-100 text-emerald-700 text-xs font-medium flex items-center gap-2">
           <CheckCircle2 className="w-4 h-4" /> Les modifications ont été enregistrées avec succès.
         </div>
       )}
 
-      {/* Settings Forms */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Personal Details Form */}
         <div className="md:col-span-2 bg-white rounded-3xl p-6 border border-slate-100 shadow-[2px_4px_16px_rgba(0,0,0,0.03)] space-y-5">
           <div className="flex items-center gap-2 pb-3 border-b border-slate-100">
             <User className="w-4 h-4 text-slate-500" />
@@ -240,7 +207,6 @@ export default function Profile({ loading = false }) {
           </form>
         </div>
 
-        {/* Change Password Card */}
         <div className="bg-white rounded-3xl p-6 border border-slate-100 shadow-[2px_4px_16px_rgba(0,0,0,0.03)] space-y-5 h-fit">
           <div className="flex items-center gap-2 pb-3 border-b border-slate-100">
             <Shield className="w-4 h-4 text-slate-500" />
