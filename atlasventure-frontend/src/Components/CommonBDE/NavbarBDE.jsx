@@ -2,6 +2,15 @@ import React from "react";
 import { Bell, User } from "lucide-react";
 
 export default function Header({ loading = false }) {
+   let userData = null;
+  try {
+    const storedUser = localStorage.getItem('user');
+    userData = storedUser ? JSON.parse(storedUser) : null;
+  } catch (e) {
+    console.error("Erreur lors du parsing du localStorage user:", e);
+  }
+
+  const currentUser = userData || {};
   if (loading) {
     return (
       <header className="h-16 bg-white border-b border-slate-100 px-8 flex items-center justify-between sticky top-0 z-10 font-sans shadow-sm animate-pulse">
@@ -47,8 +56,8 @@ export default function Header({ loading = false }) {
             <User className="w-4 h-4 text-amber-600" />
           </div>
           <div className="text-left hidden sm:block">
-            <p className="text-xs font-semibold text-slate-700">Admin BDE</p>
-            <p className="text-[10px] text-slate-400">admin@bde.com</p>
+            <p className="text-xs font-semibold text-slate-700">{currentUser?.name}</p>
+            <p className="text-[10px] text-slate-400">{currentUser?.role}</p>
           </div>
         </div>
       </div>

@@ -1,7 +1,17 @@
 import React from 'react';
 import { Search, Bell, ChevronDown } from 'lucide-react';
 
-export default function Navbar({ user, searchQuery, setSearchQuery, loading = false }) {
+export default function Navbar({searchQuery, setSearchQuery, loading = false }) {
+  let userData = null;
+  try {
+    const storedUser = localStorage.getItem('user');
+    userData = storedUser ? JSON.parse(storedUser) : null;
+  } catch (e) {
+    console.error("Erreur lors du parsing du localStorage user:", e);
+  }
+
+  const currentUser = userData || {};
+
   if (loading) {
     return (
       <header className="w-full flex justify-between items-center px-8 py-3.5 bg-[#f8fafc] border-b border-slate-200/60 font-sans animate-pulse">
@@ -51,13 +61,17 @@ export default function Navbar({ user, searchQuery, setSearchQuery, loading = fa
         {/* User Profile */}
         <div className="flex items-center gap-2.5 pl-2 pr-3 py-1 bg-white border border-slate-200/60 rounded-xl shadow-[2px_2px_6px_rgba(0,0,0,0.03)] hover:shadow-[inset_-1px_-1px_3px_rgba(0,0,0,0.05)] cursor-pointer transition-all duration-200">
           <img
-            src={user?.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100"}
+            src={currentUser?.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100"}
             alt="Profile"
             className="w-7 h-7 rounded-lg object-cover"
           />
           <div className="text-left">
-            <h4 className="text-[11px] font-semibold text-slate-800 leading-tight">{user?.name || "Abdorrahim"}</h4>
-            <p className="text-[9px] text-slate-400 capitalize">{user?.role || "student"}</p>
+            <h4 className="text-[11px] font-semibold text-slate-800 leading-tight">
+              {currentUser?.name || "Abdorrahim"}
+            </h4>
+            <p className="text-[9px] text-slate-400 capitalize">
+              {currentUser?.role || "student"}
+            </p>
           </div>
           <ChevronDown className="w-3.5 h-3.5 text-slate-400 ml-1" />
         </div>
