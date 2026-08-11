@@ -1,7 +1,33 @@
 import React from "react";
 import { Bell, User } from "lucide-react";
 
-export default function Header() {
+export default function Header({ loading = false }) {
+  // 🟢 Skeleton Component خاص بالـ Navbar
+  if (loading) {
+    return (
+      <header className="h-16 bg-white border-b border-slate-100 px-8 flex items-center justify-between sticky top-0 z-10 font-sans shadow-sm animate-pulse">
+        {/* Title Skeleton */}
+        <div className="space-y-1.5">
+          <div className="h-4 bg-slate-200 rounded w-32"></div>
+          <div className="h-2.5 bg-slate-100 rounded w-44"></div>
+        </div>
+
+        {/* User & Notifications Skeleton */}
+        <div className="flex items-center gap-4">
+          <div className="w-8 h-8 rounded-xl bg-slate-100"></div>
+          <div className="flex items-center gap-3 pl-2 border-l border-slate-100">
+            <div className="w-8 h-8 rounded-xl bg-slate-200"></div>
+            <div className="space-y-1 hidden sm:block">
+              <div className="h-3 bg-slate-200 rounded w-20"></div>
+              <div className="h-2 bg-slate-100 rounded w-24"></div>
+            </div>
+          </div>
+        </div>
+      </header>
+    );
+  }
+
+  // Content العادي
   return (
     <header className="h-16 bg-white border-b border-slate-100 px-8 flex items-center justify-between sticky top-0 z-10 font-sans shadow-sm">
       <div>

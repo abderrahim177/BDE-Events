@@ -4,13 +4,53 @@ import { Trash2, Calendar, MapPin } from "lucide-react";
 import NavbarBDE from "../../Components/CommonBDE/NavbarBDE";
 import SidebarBDE from "../../Components/CommonBDE/SidebarBDE";
 
+// Skeleton Screen Table
+const TableSkeleton = () => (
+  <div className="bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden animate-pulse">
+    <div className="p-4 bg-slate-50 border-b border-slate-100 flex justify-between">
+      <div className="h-4 bg-slate-200 rounded w-1/4"></div>
+      <div className="h-4 bg-slate-200 rounded w-1/6"></div>
+      <div className="h-4 bg-slate-200 rounded w-1/6"></div>
+      <div className="h-4 bg-slate-200 rounded w-1/12"></div>
+      <div className="h-4 bg-slate-200 rounded w-1/6"></div>
+      <div className="h-4 bg-slate-200 rounded w-12"></div>
+    </div>
+    <div className="divide-y divide-slate-100">
+      {[1, 2, 3, 4, 5].map((item) => (
+        <div key={item} className="p-4 flex items-center justify-between gap-4">
+          {/* Titre & Description Skeleton */}
+          <div className="space-y-2 w-1/4">
+            <div className="h-3.5 bg-slate-200 rounded w-3/4"></div>
+            <div className="h-2.5 bg-slate-100 rounded w-1/2"></div>
+          </div>
+          {/* Date Skeleton */}
+          <div className="h-3 bg-slate-200 rounded w-1/6"></div>
+          {/* Lieu Skeleton */}
+          <div className="h-3 bg-slate-200 rounded w-1/6"></div>
+          {/* Prix Skeleton */}
+          <div className="h-5 bg-slate-100 rounded-md w-12"></div>
+          {/* Progress Bar Skeleton */}
+          <div className="space-y-1.5 w-1/6">
+            <div className="flex justify-between">
+              <div className="h-2 bg-slate-200 rounded w-1/2"></div>
+              <div className="h-2 bg-slate-200 rounded w-1/4"></div>
+            </div>
+            <div className="h-2 bg-slate-100 rounded-full w-full"></div>
+          </div>
+          {/* Action Skeleton */}
+          <div className="h-8 w-8 bg-slate-100 rounded-xl"></div>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
 export default function ManageEvents() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [loadingId, setLoadingId] = useState(null); // معرفة أي عنصر يتنفذ عليه الحذف
+  const [loadingId, setLoadingId] = useState(null);
   const [errorMsg, setErrorMsg] = useState("");
 
-  // جلب الأحداث
   const fetchEvents = async () => {
     try {
       setLoading(true);
@@ -33,6 +73,7 @@ export default function ManageEvents() {
       console.error("Erreur API:", err);
       setErrorMsg("Impossible de charger les événements.");
     } finally {
+      // إيقاف Skeleton بعد التحميل
       setLoading(false);
     }
   };
@@ -70,12 +111,12 @@ export default function ManageEvents() {
   return (
     <div className="flex h-screen bg-slate-50 overflow-hidden font-sans">
       {/* Sidebar Component */}
-      <SidebarBDE />
+      <SidebarBDE loading={loading} />
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col overflow-y-auto min-w-0">
         {/* Navbar Component */}
-        <NavbarBDE />
+        <NavbarBDE loading={loading} />
 
         {/* Page Content Container */}
         <main className="p-4 sm:p-8 max-w-7xl w-full mx-auto space-y-6">
@@ -97,10 +138,8 @@ export default function ManageEvents() {
           )}
 
           {loading ? (
-            <div className="flex flex-col items-center justify-center py-20 gap-2 text-slate-400">
-              <div className="w-5 h-5 border-2 border-slate-300 border-t-amber-500 rounded-full animate-spin"></div>
-              <span className="text-xs">Chargement des événements...</span>
-            </div>
+            /* Skeleton Table */
+            <TableSkeleton />
           ) : (
             <div className="bg-white rounded-3xl border border-slate-100 shadow-sm overflow-x-auto">
               <table className="w-full text-left text-xs text-slate-600 min-w-[750px]">
@@ -151,10 +190,7 @@ export default function ManageEvents() {
                           <td className="p-4 text-slate-600 whitespace-nowrap">
                             <div className="flex items-center gap-1.5">
                               <Calendar className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-                              <span>
-                                {item.date_time ||                
-                                  "N/A"}
-                              </span>
+                              <span>{item.datetime || item.date_time || "N/A"}</span>
                             </div>
                           </td>
 
@@ -162,7 +198,7 @@ export default function ManageEvents() {
                           <td className="p-4 text-slate-600 whitespace-nowrap">
                             <div className="flex items-center gap-1.5">
                               <MapPin className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-                              <span>{item.location || "N/A"}</span>
+                              <span>{item.lieu || item.location || "N/A"}</span>
                             </div>
                           </td>
 

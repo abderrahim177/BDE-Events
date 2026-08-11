@@ -1,14 +1,54 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { LayoutDashboard, CalendarPlus, Settings, Ticket, LogOut } from "lucide-react";
+import { LayoutDashboard, CalendarPlus, Settings, LogOut } from "lucide-react";
 
-export default function Aside() {
+export default function Aside({ loading = false }) {
   const navItems = [
     { name: "Dashboard", path: "/admin/dashboard", icon: LayoutDashboard },
     { name: "Créer Événement", path: "/admin/events/create", icon: CalendarPlus },
     { name: "Gérer Événements", path: "/admin/events/manage", icon: Settings },
   ];
 
+  // 🟢 Skeleton Component خاص بالـ Sidebar (يتناسب مع خلفية Dark Mode)
+  if (loading) {
+    return (
+      <aside className="w-64 bg-slate-900 min-h-screen p-5 flex flex-col justify-between border-r border-slate-800 shadow-xl font-sans animate-pulse">
+        <div className="space-y-8">
+          {/* Logo Skeleton */}
+          <div className="flex items-center gap-3 px-2">
+            <div className="w-9 h-9 rounded-2xl bg-slate-800"></div>
+            <div className="space-y-1.5">
+              <div className="h-3.5 bg-slate-800 rounded w-24"></div>
+              <div className="h-2 bg-slate-800/60 rounded w-16"></div>
+            </div>
+          </div>
+
+          {/* Navigation Links Skeleton */}
+          <div className="space-y-2">
+            {[1, 2, 3].map((item) => (
+              <div
+                key={item}
+                className="h-9 bg-slate-800/50 rounded-2xl w-full flex items-center px-3.5 gap-3"
+              >
+                <div className="w-4 h-4 bg-slate-700 rounded-md"></div>
+                <div className="h-3 bg-slate-700 rounded w-24"></div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Logout Button Skeleton */}
+        <div className="pt-4 border-t border-slate-800">
+          <div className="h-9 bg-slate-800/40 rounded-2xl w-full flex items-center px-3.5 gap-3">
+            <div className="w-4 h-4 bg-slate-700 rounded-md"></div>
+            <div className="h-3 bg-slate-700 rounded w-20"></div>
+          </div>
+        </div>
+      </aside>
+    );
+  }
+
+  // Content العادي
   return (
     <aside className="w-64 bg-slate-900 text-slate-300 min-h-screen p-5 flex flex-col justify-between border-r border-slate-800 shadow-xl font-sans">
       <div className="space-y-8">
