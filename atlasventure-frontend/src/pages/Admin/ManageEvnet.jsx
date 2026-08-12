@@ -7,13 +7,14 @@ import SidebarBDE from "../../Components/CommonBDE/SidebarBDE";
 // Skeleton Screen Table
 const TableSkeleton = () => (
   <div className="bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden animate-pulse">
-    <div className="p-4 bg-slate-50 border-b border-slate-100 flex justify-between">
-      <div className="h-4 bg-slate-200 rounded w-1/4"></div>
-      <div className="h-4 bg-slate-200 rounded w-1/6"></div>
-      <div className="h-4 bg-slate-200 rounded w-1/6"></div>
-      <div className="h-4 bg-slate-200 rounded w-1/12"></div>
-      <div className="h-4 bg-slate-200 rounded w-1/6"></div>
-      <div className="h-4 bg-slate-200 rounded w-12"></div>
+    {/* Header Skeleton : Zadt height (h-7) u py-5 bash t-kon tkbira */}
+    <div className="py-5 px-4 bg-slate-50 border-b border-slate-100 flex justify-between items-center">
+      <div className="h-7 bg-slate-200 rounded w-1/4"></div>
+      <div className="h-7 bg-slate-200 rounded w-1/6"></div>
+      <div className="h-7 bg-slate-200 rounded w-1/6"></div>
+      <div className="h-7 bg-slate-200 rounded w-1/12"></div>
+      <div className="h-7 bg-slate-200 rounded w-1/6"></div>
+      <div className="h-7 bg-slate-200 rounded w-12"></div>
     </div>
     <div className="divide-y divide-slate-100">
       {[1, 2, 3, 4, 5].map((item) => (
@@ -108,12 +109,12 @@ export default function ManageEvents() {
   return (
     <div className="flex h-screen bg-slate-50 overflow-hidden font-sans">
       {/* Sidebar Component */}
-      <SidebarBDE loading={loading} />
+      <SidebarBDE />
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col overflow-y-auto min-w-0">
+      <div className="flex-1 flex flex-col min-w-0">
         {/* Navbar Component */}
-        <NavbarBDE loading={loading} />
+        <NavbarBDE />
 
         {/* Page Content Container */}
         <main className="p-4 sm:p-8 max-w-7xl w-full mx-auto space-y-6">
@@ -140,16 +141,17 @@ export default function ManageEvents() {
           ) : (
             <div className="bg-white rounded-3xl border border-slate-100 shadow-sm overflow-x-auto">
               <table className="w-full text-left text-xs text-slate-600 min-w-[750px]">
-                <thead className="bg-slate-50 border-b border-slate-100 font-semibold text-slate-700">
+                <thead className="bg-slate-50 border-b border-slate-100 font-semibold text-slate-700 uppercase tracking-wider">
                   <tr>
-                    <th className="p-4">Titre & Description</th>
-                    <th className="p-4 whitespace-nowrap">Date & Heure</th>
-                    <th className="p-4 whitespace-nowrap">Lieu</th>
-                    <th className="p-4 whitespace-nowrap">Prix</th>
-                    <th className="p-4 min-w-[160px] whitespace-nowrap">
+                    {/* Zadt py-5 f blasa p-4 bash header yji twel u kbir */}
+                    <th className="py-5 px-4">Titre & Description</th>
+                    <th className="py-5 px-4 whitespace-nowrap">Date & Heure</th>
+                    <th className="py-5 px-4 whitespace-nowrap">Lieu</th>
+                    <th className="py-5 px-4 whitespace-nowrap">Prix</th>
+                    <th className="py-5 px-4 min-w-[160px] whitespace-nowrap">
                       Réservations / Capacité
                     </th>
-                    <th className="p-4 text-right whitespace-nowrap w-20">
+                    <th className="py-5 px-4 text-right whitespace-nowrap w-20">
                       Actions
                     </th>
                   </tr>

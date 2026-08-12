@@ -20,7 +20,7 @@ export default function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/unauthorized" element={<Unauthorized />} />
 
-        {/* 🔴 ADMIN ROUTES */}
+        {/* ADMIN ROUTES */}
         <Route element={<RoleBasedLayout requiredRole="admin" />}>
           <Route path="/admin" element={<Navigate to="/admin/dashboard" replace />} />
           <Route path="/admin/dashboard" element={<DashboardAdmin />} />
@@ -28,7 +28,7 @@ export default function App() {
           <Route path="/admin/events/manage" element={<ManageEvents />} />
         </Route>
 
-        {/* 🟢 STUDENT ROUTES */}
+        {/* STUDENT ROUTES */}
         <Route element={<RoleBasedLayout requiredRole="student" />}>
           <Route path="/student/dashboard" element={<StudentDashboard />} />
 
@@ -40,3 +40,4 @@ export default function App() {
     </BrowserRouter>
   );
 }
+

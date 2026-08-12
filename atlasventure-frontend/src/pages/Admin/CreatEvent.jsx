@@ -108,12 +108,12 @@ export default function CreateEvent() {
   return (
     <div className="flex h-screen bg-slate-50 overflow-hidden font-sans">
       {/* Sidebar Component */}
-      <SidebarBDE loading={pageLoading} />
+      <SidebarBDE  />
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
         {/* Navbar Component */}
-        <NavbarBDE loading={pageLoading} />
+        <NavbarBDE  />
 
         {/* Page Content Container (قابل للتمرير وبدون my-auto) */}
         <main className="flex-1 overflow-y-auto p-4 sm:p-8">
@@ -152,7 +152,6 @@ export default function CreateEvent() {
                       }
                     />
                   </div>
-
                   <div>
                     <label className="block font-medium text-slate-700 mb-1">
                       Description de l'événement
@@ -167,7 +166,6 @@ export default function CreateEvent() {
                       }
                     />
                   </div>
-
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block font-medium text-slate-700 mb-1">

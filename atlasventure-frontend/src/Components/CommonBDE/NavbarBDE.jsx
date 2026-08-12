@@ -35,9 +35,8 @@ export default function Header({ loading = false }) {
     );
   }
 
-  // Content العادي
   return (
-    <header className="h-16 bg-white border-b border-slate-100 px-8 flex items-center justify-between sticky top-0 z-10 font-sans shadow-sm">
+    <header className="h-[60px] bg-white border-b border-slate-100 px-8 flex items-center justify-between sticky top-0 z-10 font-sans shadow-sm">
       <div>
         <h2 className="text-sm font-bold text-slate-800">Panneau de Gestion</h2>
         <p className="text-[10px] text-slate-400">Bienvenue sur votre espace BDE</p>

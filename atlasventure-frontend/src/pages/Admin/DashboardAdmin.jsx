@@ -88,12 +88,12 @@ export default function DashboardAdmin() {
   return (
     <div className="flex h-screen bg-slate-50 overflow-hidden font-sans">
       {/* Sidebar à gauche */}
-      <SidebarBDE loading={loading} />
+      <SidebarBDE  />
 
       {/* Conteneur principal (Navbar + Contenu) */}
       <div className="flex-1 flex flex-col min-w-0 ">
         {/* Navbar en haut */}
-        <NavbarBDE loading={loading} />
+        <NavbarBDE />
 
         {/* Zone de contenu défilable */}
         <main className="flex-1 overflow-y-auto p-8">
