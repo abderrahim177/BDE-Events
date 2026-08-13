@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-
+import { useNavigate, Link, useLocation } from "react-router-dom";
 export default function Login() {
+  const location = useLocation();
+  const [error, setError] = useState(location.state?.message || null);
   const [formData, setFormData] = useState({
     email: '',
     password: '',
     remember: false,
   });
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -18,9 +18,7 @@ export default function Login() {
     e.preventDefault();
     setError(null);
     setLoading(true);
-
-    localStorage.clear();
-
+    sessionStorage.clear();
     try {
       const response = await axios.post('http://localhost:8000/api/login', {
         email: formData.email,
@@ -32,9 +30,10 @@ export default function Login() {
       if (token && user) {
         const userRole = user.role?.toLowerCase()?.trim();
 
-        localStorage.setItem('token', token);
-        localStorage.setItem('user', JSON.stringify(user));
-        localStorage.setItem('user_role', userRole); 
+        sessionStorage.setItem('token', token);
+        sessionStorage.setItem('user', JSON.stringify(user));
+        sessionStorage.setItem('user_role', userRole); 
+
         if (userRole === 'admin') {
           navigate('/admin/dashboard', { replace: true }); 
         } else if (userRole === 'student') {

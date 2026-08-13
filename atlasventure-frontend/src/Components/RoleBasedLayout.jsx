@@ -2,10 +2,12 @@
 import React from "react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { ROLE_ALLOWED_ROUTES } from "../config/roleRoutes";
+import useAutoLogout from "../Components/useAutoLogout";
 export default function RoleBasedLayout({ requiredRole }) {
   const location = useLocation();
-  const token = localStorage.getItem("token");
-  const userRole = localStorage.getItem("user_role")?.toLowerCase()?.trim();
+  const token = sessionStorage.getItem("token");
+  const userRole = sessionStorage.getItem("user_role")?.toLowerCase()?.trim();
+  useAutoLogout(15);
   if (!token) {
     return <Navigate to="/login" replace />;
   }

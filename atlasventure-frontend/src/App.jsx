@@ -31,7 +31,6 @@ export default function App() {
         {/* STUDENT ROUTES */}
         <Route element={<RoleBasedLayout requiredRole="student" />}>
           <Route path="/student/dashboard" element={<StudentDashboard />} />
-
         </Route>
 
         {/* Catch-all for non-existing URLs */}

@@ -3,9 +3,10 @@ version: '3.8'
 services:
   backend:
     build:
-      context: ./backend 
+      context: ./backend
       dockerfile: Dockerfile
-    container_name: laravel_backend
+    image: votre-username/bde-events-api:v1
+    container_name: bde_events_api
     ports:
       - "8000:8000"
     volumes:
@@ -13,7 +14,7 @@ services:
     environment:
       - DB_HOST=db
       - DB_PORT=3306
-      - DB_DATABASE=my_database
+      - DB_DATABASE=bde_events
       - DB_USERNAME=root
       - DB_PASSWORD=root
     depends_on:
@@ -21,24 +22,22 @@ services:
 
   frontend:
     build:
-      context: ./frontend 
+      context: ./frontend
       dockerfile: Dockerfile
-    container_name: react_frontend
+    image: votre-username/bde-events-react:v1
+    container_name: bde_events_react
     ports:
-      - "5173:5173"
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
+      - "8080:8080"
     environment:
       - VITE_API_BASE_URL=http://localhost:8000/api
 
   db:
     image: mysql:8.0
-    container_name: mysql_db
+    container_name: bde_events_db
     ports:
       - "3306:3306"
     environment:
-      MYSQL_DATABASE: my_database
+      MYSQL_DATABASE: bde_events
       MYSQL_ROOT_PASSWORD: root
     volumes:
       - db_data:/var/lib/mysql

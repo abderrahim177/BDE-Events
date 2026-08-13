@@ -81,7 +81,6 @@ export default function StudentDashboard() {
     try {
       setReservingId(eventId); 
       const token = localStorage.getItem("token");
-
       const response = await axios.post(
         `http://127.0.0.1:8000/api/reservation/${eventId}`,
         {}, 
@@ -116,7 +115,6 @@ export default function StudentDashboard() {
       setReservingId(null); 
     }
   };
-
   const filteredEvents = events.filter((event) => {
     const matchesSearch =
       event.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||

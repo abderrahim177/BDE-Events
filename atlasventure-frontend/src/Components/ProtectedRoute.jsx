@@ -13,11 +13,10 @@ export default function ProtectedRoute({ allowedRoles }) {
     if (userRole === "student") {
       return <Navigate to="/student/dashboard" replace />;
     }
-    if (userRole === "admin" || userRole === "bde") {
+    if (userRole === "admin") {
       return <Navigate to="/admin/dashboard" replace />;
     }
     return <Navigate to="/login" replace />;
   }
-
   return <Outlet />;
 }

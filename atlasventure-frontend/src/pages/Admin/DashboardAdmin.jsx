@@ -5,7 +5,6 @@ import NavbarBDE from '../../Components/CommonBDE/NavbarBDE';
 import SidebarBDE from '../../Components/CommonBDE/SidebarBDE';
 import axios from "axios";
 
-// 🟢 مكون Skeleton Screen الخاص بالإحصائيات والهيدر
 const DashboardSkeleton = () => (
   <div className="max-w-7xl mx-auto space-y-6 animate-pulse">
     {/* Header Skeleton */}
